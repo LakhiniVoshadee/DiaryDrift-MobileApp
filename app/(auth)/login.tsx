@@ -34,42 +34,48 @@ const Login = () => {
   };
 
   return (
-    <View className="flex-1 bg-gray-50 justify-center px-4">
-      <View className="bg-white rounded-xl shadow-md p-6 max-w-lg w-full mx-auto">
-        <Text className="text-2xl font-semibold text-center text-gray-900 mb-6">
-          Login
-        </Text>
+    <View className="flex-1 bg-gradient-to-b from-[#D3BDF3] to-[#E6CFFF]">
+      {/* Background Blobs */}
+      <View className="absolute top-[-15%] left-[-10%] w-40 h-40 bg-[#FFC1CC] rounded-full opacity-50 blur-md" />
+      <View className="absolute bottom-[-10%] right-[-10%] w-48 h-48 bg-[#FFC1CC] rounded-full opacity-40 blur-md" />
 
-        <TextInput
-          placeholder="Email"
-          className="border border-gray-200 bg-gray-100 rounded-md p-3 mb-4 text-base"
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-          keyboardType="email-address"
-        />
-        <TextInput
-          placeholder="Password"
-          className="border border-gray-200 bg-gray-100 rounded-md p-3 mb-6 text-base"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-        <TouchableOpacity
-          onPress={handleLogin}
-          className="bg-indigo-600 p-3 rounded-md"
-        >
-          {isLoading ? (
-            <ActivityIndicator size="small" color="#fff" />
-          ) : (
-            <Text className="text-white text-center font-medium">Login</Text>
-          )}
-        </TouchableOpacity>
-        <Pressable className="mt-4" onPress={() => router.push("/register")}>
-          <Text className="text-indigo-600 text-center font-medium">
-            Do not have an account? Register
+      <View className="flex-1 justify-center px-4">
+        <View className="bg-white rounded-2xl shadow-lg p-6 max-w-lg w-full mx-auto">
+          <Text className="text-2xl font-semibold text-center text-gray-900 mb-6">
+            Login
           </Text>
-        </Pressable>
+
+          <TextInput
+            placeholder="Email"
+            className="border border-gray-200 bg-gray-100 rounded-md p-3 mb-4 text-base"
+            value={email}
+            onChangeText={setEmail}
+            autoCapitalize="none"
+            keyboardType="email-address"
+          />
+          <TextInput
+            placeholder="Password"
+            className="border border-gray-200 bg-gray-100 rounded-md p-3 mb-6 text-base"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+          <TouchableOpacity
+            onPress={handleLogin}
+            className="bg-[#A084DC] p-3 rounded-md"
+          >
+            {isLoading ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <Text className="text-white text-center font-medium">Login</Text>
+            )}
+          </TouchableOpacity>
+          <Pressable className="mt-4" onPress={() => router.push("/register")}>
+            <Text className="text-[#A084DC] text-center font-medium">
+              Do not have an account? Register
+            </Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
