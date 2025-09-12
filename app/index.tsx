@@ -9,7 +9,7 @@ const Index = () => {
     <View className="flex-1 bg-white">
       {/* Header */}
       <View className="bg-blue-500 pt-12 pb-4 px-5">
-        <Text className="text-white text-2xl font-bold">Home</Text>
+        <Text className="text-white text-2xl font-bold">DiaryDrift</Text>
         <Text className="text-blue-100 text-sm mt-1">Welcome back!</Text>
       </View>
 
