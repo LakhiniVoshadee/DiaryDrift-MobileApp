@@ -46,7 +46,7 @@ const Login = () => {
           <Text className="text-4xl font-bold text-center text-gray-800 mb-2">
             Log in
           </Text>
-          
+
           <View className="mb-6">
             <Text className="text-gray-600 text-sm font-medium mb-2 ml-1">
               EMAIL
@@ -96,7 +96,7 @@ const Login = () => {
               <ActivityIndicator size="small" color="#fff" />
             ) : (
               <Text className="text-white text-center font-bold text-lg">
-                SIGN UP
+                SIGN IN
               </Text>
             )}
           </TouchableOpacity>
@@ -104,7 +104,7 @@ const Login = () => {
           <Pressable onPress={() => router.push("/register")}>
             <Text className="text-gray-600 text-center text-sm">
               Not registered yet?{" "}
-              <Text className="text-[#A084DC] font-semibold">Sign up</Text>
+              <Text className="text-[#A084DC] font-semibold">Sign Up</Text>
             </Text>
           </Pressable>
 

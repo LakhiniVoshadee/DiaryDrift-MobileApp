@@ -48,7 +48,7 @@ const DashBoardLayout = () => {
         <Tabs.Screen
           name="profile"
           options={{
-            title: "Profile",
+            title: "Jurnal",
             tabBarIcon: (data) => (
               <AntDesign name="profile" size={24} color="black" />
             ),

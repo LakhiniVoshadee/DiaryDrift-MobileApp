@@ -109,32 +109,6 @@ const Home = () => {
       </ScrollView>
 
       {/* Bottom Navigation */}
-      <View className="flex-row justify-around items-center bg-white py-3 border-t border-gray-200 shadow-md">
-        {["Home", "Explore", "New", "History", "Profile"].map((item, index) => (
-          <TouchableOpacity key={index} className="items-center">
-            <View className="h-6 w-6 items-center justify-center mb-1">
-              <Text>
-                {item === "Home"
-                  ? "🏠"
-                  : item === "Explore"
-                  ? "🔍"
-                  : item === "New"
-                  ? "➕"
-                  : item === "History"
-                  ? "⏳"
-                  : "👤"}
-              </Text>
-            </View>
-            <Text
-              className={`text-xs ${
-                index === 0 ? "text-[#A084DC] font-medium" : "text-gray-500"
-              }`}
-            >
-              {item}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
     </View>
   );
 };
