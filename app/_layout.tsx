@@ -1,4 +1,4 @@
-import LoaderProvider from "@/context/LoaderContext";
+import {LoaderProvider} from "@/context/LoaderContext";
 import "../global.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { Slot } from "expo-router";

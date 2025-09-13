@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 const TaskFormScreen = () => {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id } = useLocalSearchParams<{ id?: string }>();
   const isNew = !id || id === "new";
 
   const [title, setTitle] = React.useState("");
@@ -31,7 +31,7 @@ const TaskFormScreen = () => {
       }
     };
     load();
-  }, [id]);
+  }, [hideLoader, id, isNew, showLoader]);
   const handleSubmit = async () => {
     // validations
     if (!title.trim()) {

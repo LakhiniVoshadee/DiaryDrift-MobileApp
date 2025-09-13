@@ -16,7 +16,7 @@ const Index = () => {
         router.push("/login");
       }
     }
-  }, [user, loading]);
+  }, [user, loading, router]);
 
   return loading ? (
     <View className="flex-1 w-full justify-center align-items-center">

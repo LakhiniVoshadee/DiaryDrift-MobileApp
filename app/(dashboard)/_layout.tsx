@@ -13,7 +13,7 @@ const DashBoardLayout = () => {
     if (!loading && !user) {
       router.push("/login");
     }
-  }, [user, loading]);
+  }, [user, loading, router]);
   if (loading) {
     return (
       <View className="flex-1 justify-center items-center">
