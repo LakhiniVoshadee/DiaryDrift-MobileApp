@@ -1,4 +1,4 @@
-import { getAllTaskData } from "@/services/taskService";
+import { getAllTaskData, deleteTask } from "@/services/taskService";
 import { Task } from "@/types/tasks";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter, useSegments } from "expo-router";
@@ -14,37 +14,48 @@ import {
 
 const TaskScreen = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const handleFetchData = async () => {
-    await getAllTaskData()
-      .then((data) => {
-        console.log(data);
-        setTasks(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
+  const router = useRouter();
   const segment = useSegments();
+
+  const handleFetchData = async () => {
+    try {
+      const data = await getAllTaskData();
+      setTasks(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     handleFetchData();
   }, [segment]);
-  const router = useRouter();
 
-  const handleDelete = () => {
-    Alert.alert("Alert Title", "Alert Message", [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-        style: "cancel",
-      },
-      {
-        text: "OK",
-        onPress: () => console.log("OK Pressed"),
-      },
-    ]);
+  const handleDelete = (taskId: string) => {
+    Alert.alert(
+      "Delete Task",
+      "Are you sure you want to delete this task?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await deleteTask(taskId);
+              await handleFetchData(); // Refetch after deletion!
+            } catch (err) {
+              Alert.alert("Error", "Could not delete task.");
+            }
+          },
+        },
+      ]
+    );
   };
+
+  const handleEdit = (taskId: string) => {
+    router.push(`/(dashboard)/tasks/${taskId}`);
+  };
+
   return (
     <View className="flex-1 w-full justify-center items-center">
       <Text className="text-4xl text-center">Task Screen</Text>
@@ -54,27 +65,31 @@ const TaskScreen = () => {
         </Pressable>
       </View>
       <ScrollView className="mt-4">
-        {tasks.map((task) => {
-          return (
-            <View
-              key={task.id}
-              className="bg-gray-200 p-4 mb-3 rounded-lg mx-4 border border-gray-400"
-            >
-              <Text className="text-lg font-semibold">{task.title}</Text>
-              <Text className="text-sm text-gray-700 mb-2">
-                {task.description}
-              </Text>
-              <View className="flex-row">
-                <TouchableOpacity className="bg-yellow-300 px-3 py-1 rounded">
-                  <Text className="text-xl">Edit</Text>
-                </TouchableOpacity>
-                <TouchableOpacity className="bg-red-500 px-3 py-1 rounded">
-                  <Text className="text-xl">Delete</Text>
-                </TouchableOpacity>
-              </View>
+        {tasks.map((task) => (
+          <View
+            key={task.id}
+            className="bg-gray-200 p-4 mb-3 rounded-lg mx-4 border border-gray-400"
+          >
+            <Text className="text-lg font-semibold">{task.title}</Text>
+            <Text className="text-sm text-gray-700 mb-2">
+              {task.description}
+            </Text>
+            <View className="flex-row">
+              <TouchableOpacity
+                className="bg-yellow-300 px-3 py-1 rounded mr-2"
+                onPress={() => handleEdit(task.id!)}
+              >
+                <Text className="text-xl">Edit</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                className="bg-red-500 px-3 py-1 rounded"
+                onPress={() => handleDelete(task.id!)}
+              >
+                <Text className="text-xl">Delete</Text>
+              </TouchableOpacity>
             </View>
-          );
-        })}
+          </View>
+        ))}
       </ScrollView>
     </View>
   );

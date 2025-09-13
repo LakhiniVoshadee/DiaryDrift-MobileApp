@@ -7,68 +7,48 @@ import {
   doc,
   getDoc,
   getDocs,
-  query,
   updateDoc,
   where,
+  query,
 } from "firebase/firestore";
-import api from "./config/api";
 
+// Collection reference for tasks
 export const taskColRef = collection(db, "tasks");
-export const getAllTask = async () => {
-  const res = await api.get("/tasks");
-  return res.data;
-};
 
-export const addTasks = async (task: any) => {
-  const res = await api.post("/tasks", task);
-  return res.data;
-};
-
-// firebase firestore
-
-export const createTask = async (task: Task) => {
+// CREATE
+export const createTask = async (task: Omit<Task, "id">) => {
   const docRef = await addDoc(taskColRef, task);
   return docRef.id;
 };
 
-export const updateTask = async (id: string, task: Task) => {
-  const docRef = doc(db, "tasks", id);
-  const { id: _id, ...taskData } = task;
-  return await updateDoc(docRef, taskData);
-};
-
-export const deleteTask = async (id: string) => {
-  const docRef = doc(db, "tasks", id);
-  return await deleteDoc(docRef);
-};
-
-export const getAllTaskData = async () => {
+// READ ALL
+export const getAllTaskData = async (): Promise<Task[]> => {
   const snapshot = await getDocs(taskColRef);
-  const taskList: Task[] = snapshot.docs.map((taskRef) => ({
+  return snapshot.docs.map((taskRef) => ({
     id: taskRef.id,
     ...taskRef.data(),
   })) as Task[];
-  return taskList;
 };
 
-export const getTaskById = async (id: string) => {
+// READ ONE
+export const getTaskById = async (id: string): Promise<Task | null> => {
   const taskDocRef = doc(db, "tasks", id);
   const snapshot = await getDoc(taskDocRef);
-  const task = snapshot.exists()
-    ? ({
-        id: snapshot.id,
-        ...snapshot.data(),
-      } as Task)
-    : null;
-  return task;
+  if (!snapshot.exists()) return null;
+  return {
+    id: snapshot.id,
+    ...snapshot.data(),
+  } as Task;
 };
 
-export const getAllTaskByUserId = async (userId: string) => {
-  const q = query(taskColRef, where("userId", "==", userId));
-  const snapshot = await getDocs(q);
-  const taskList: Task[] = snapshot.docs.map((taskRef) => ({
-    id: taskRef.id,
-    ...taskRef.data(),
-  })) as Task[];
-  return taskList;
+// UPDATE
+export const updateTask = async (id: string, task: Omit<Task, "id">) => {
+  const docRef = doc(db, "tasks", id);
+  await updateDoc(docRef, { ...task });
+};
+
+// DELETE
+export const deleteTask = async (id: string) => {
+  const docRef = doc(db, "tasks", id);
+  await deleteDoc(docRef);
 };
