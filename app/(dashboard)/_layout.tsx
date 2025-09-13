@@ -3,7 +3,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Tabs, useRouter } from "expo-router";
 import React, { useEffect } from "react";
-import { ActivityIndicator, SafeAreaView } from "react-native";
+import { ActivityIndicator, SafeAreaView, View } from "react-native";
 
 const DashBoardLayout = () => {
   const { user, loading } = useAuth();
@@ -16,9 +16,9 @@ const DashBoardLayout = () => {
   }, [user, loading]);
   if (loading) {
     return (
-      <view className="flex-1 justify-center items-center">
+      <View className="flex-1 justify-center items-center">
         <ActivityIndicator size="large" />
-      </view>
+      </View>
     );
   }
 
@@ -46,29 +46,38 @@ const DashBoardLayout = () => {
           }}
         />
         <Tabs.Screen
-          name="profile"
+          name="tasks/index"
           options={{
-            title: "Jurnal",
+            title: "Tasks",
             tabBarIcon: (data) => (
-              <AntDesign name="profile" size={24} color="black" />
+              <FontAwesome5 name="tasks" size={24} color="black" />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="journal"
+          options={{
+            title: "Journal",
+            tabBarIcon: (data) => (
+              <AntDesign name="down" size={24} color="black" />
             ),
           }}
         />
         <Tabs.Screen
           name="setting"
           options={{
-            title: "Settings",
+            title: "Setting",
             tabBarIcon: (data) => (
               <AntDesign name="setting" size={24} color="black" />
             ),
           }}
         />
         <Tabs.Screen
-          name="tasks/index"
+          name="profile"
           options={{
-            title: "Tasks",
+            title: "Profile",
             tabBarIcon: (data) => (
-              <FontAwesome5 name="tasks" size={24} color="black" />
+              <AntDesign name="user" size={24} color="black" />
             ),
           }}
         />
