@@ -38,49 +38,101 @@ const Register = () => {
         setIsLoading(false);
       });
   };
+
   return (
-    <View className="flex-1 bg-gray-50 justify-center px-4">
-      <View className="bg-white rounded-xl shadow-md p-6 max-w-lg w-full mx-auto">
-        <Text className="text-2xl font-semibold text-center text-gray-900 mb-6">
-          Register
-        </Text>
+    <View className="flex-1 bg-[#E6D7FF]">
+      {/* Background Blobs */}
+      <View className="absolute top-[-15%] left-[-15%] w-48 h-48 bg-[#FFB3BA] rounded-full opacity-60" />
+      <View className="absolute top-[20%] right-[-20%] w-64 h-64 bg-[#FFB3BA] rounded-full opacity-40" />
+      <View className="absolute bottom-[-15%] right-[-10%] w-56 h-56 bg-[#FFB3BA] rounded-full opacity-50" />
+      <View className="absolute bottom-[10%] left-[-15%] w-40 h-40 bg-[#FFB3BA] rounded-full opacity-30" />
 
-        <TextInput
-          placeholder="Email"
-          className="border border-gray-200 bg-blue-100 rounded-md p-3 mb-4 text-base text-black"
-          value={email}
-          onChangeText={setEmail}
-        />
-        <TextInput
-          placeholder="Password"
-          className="border border-gray-200 bg-blue-100 rounded-md p-3 mb-4 text-base text-black"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-        <TextInput
-          placeholder="Confirm Password"
-          className="border border-gray-200 bg-blue-100 rounded-md p-3 mb-6 text-base"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-          secureTextEntry
-        />
-        <TouchableOpacity
-          onPress={handleRegister}
-          className="bg-indigo-600 p-3 rounded-md"
-        >
-          {isLoading ? (
-            <ActivityIndicator size="small" color="#fff" />
-          ) : (
-            <Text className="text-white text-center font-medium">Register</Text>
-          )}
-        </TouchableOpacity>
-
-        <Pressable className="mt-4" onPress={() => router.back()}>
-          <Text className="text-indigo-600 text-center font-medium">
-            Already have an account? Log in
+      <View className="flex-1 justify-center px-6">
+        <View className="bg-white/90 backdrop-blur-sm rounded-[25px] shadow-xl p-8 max-w-lg w-full mx-auto">
+          <Text className="text-4xl font-bold text-center text-gray-800 mb-2">
+            Sign Up
           </Text>
-        </Pressable>
+
+          <View className="mb-6">
+            <Text className="text-gray-600 text-sm font-medium mb-2 ml-1">
+              EMAIL
+            </Text>
+            <TextInput
+              placeholder="astanger@gmail.com"
+              className="border border-gray-200 bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
+              value={email}
+              onChangeText={setEmail}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              placeholderTextColor="#9CA3AF"
+            />
+          </View>
+
+          <View className="mb-6">
+            <Text className="text-gray-600 text-sm font-medium mb-2 ml-1">
+              PASSWORD
+            </Text>
+            <TextInput
+              placeholder="••••••••••"
+              className="border border-gray-200 bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              placeholderTextColor="#9CA3AF"
+            />
+          </View>
+
+          <View className="mb-4">
+            <Text className="text-gray-600 text-sm font-medium mb-2 ml-1">
+              CONFIRM PASSWORD
+            </Text>
+            <TextInput
+              placeholder="••••••••••"
+              className="border border-gray-200 bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+              secureTextEntry
+              placeholderTextColor="#9CA3AF"
+            />
+          </View>
+
+          <View className="flex-row justify-between items-center mb-6">
+            <View className="flex-row items-center">
+              <View className="w-4 h-4 border border-gray-300 rounded-sm mr-2 bg-white" />
+              <Text className="text-gray-600 text-sm">I agree to Terms</Text>
+            </View>
+          </View>
+
+          <TouchableOpacity
+            onPress={handleRegister}
+            className="bg-[#A084DC] p-4 rounded-[15px] shadow-md active:bg-[#8B5CF6] mb-6"
+          >
+            {isLoading ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <Text className="text-white text-center font-bold text-lg">
+                SIGN UP
+              </Text>
+            )}
+          </TouchableOpacity>
+
+          <Pressable onPress={() => router.back()}>
+            <Text className="text-gray-600 text-center text-sm">
+              Already have an account?{" "}
+              <Text className="text-[#A084DC] font-semibold">Sign In</Text>
+            </Text>
+          </Pressable>
+
+          {/* Social Login Icons */}
+          <View className="flex-row justify-center items-center mt-6 space-x-4">
+            <View className="w-10 h-10 bg-[#4267B2] rounded-full justify-center items-center">
+              <Text className="text-white font-bold text-lg">f</Text>
+            </View>
+            <View className="w-10 h-10 bg-white border border-gray-200 rounded-full justify-center items-center">
+              <Text className="text-[#DB4437] font-bold text-lg">G</Text>
+            </View>
+          </View>
+        </View>
       </View>
     </View>
   );
