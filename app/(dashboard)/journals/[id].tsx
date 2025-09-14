@@ -1,10 +1,10 @@
 import { useLoader } from "@/context/LoaderContext";
-import { createTask, getTaskById } from "@/services/taskService";
+import { createJournal, getJournalById, updateJournal } from "@/services/journalService";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-const TaskFormScreen = () => {
+const JournalFormScreen = () => {
   const { id } = useLocalSearchParams<{ id?: string }>();
   const isNew = !id || id === "new";
 
@@ -12,7 +12,6 @@ const TaskFormScreen = () => {
   const [description, setDescription] = React.useState("");
 
   const router = useRouter();
-
   const { hideLoader, showLoader } = useLoader();
 
   useEffect(() => {
@@ -20,10 +19,10 @@ const TaskFormScreen = () => {
       if (!isNew && id) {
         try {
           showLoader();
-          const task = await getTaskById(id);
-          if (task) {
-            setTitle(task.title);
-            setDescription(task.description);
+          const journal = await getJournalById(id);
+          if (journal) {
+            setTitle(journal.title);
+            setDescription(journal.description);
           }
         } finally {
           hideLoader();
@@ -32,8 +31,8 @@ const TaskFormScreen = () => {
     };
     load();
   }, [hideLoader, id, isNew, showLoader]);
+
   const handleSubmit = async () => {
-    // validations
     if (!title.trim()) {
       Alert.alert("Validation Error", "Title is required.");
       return;
@@ -41,24 +40,27 @@ const TaskFormScreen = () => {
     try {
       showLoader();
       if (isNew) {
-        await createTask({ title, description });
+        await createJournal({ title, description });
+      } else if (id) {
+        await updateJournal(id, { title, description });
       }
       router.back();
     } catch (err) {
-      console.error("Error creating task:", err);
-      Alert.alert("Error", "Could not create task.");
+      console.error("Error saving journal:", err);
+      Alert.alert("Error", "Could not save journal entry.");
     } finally {
       hideLoader();
     }
   };
+
   return (
     <View className="flex-1 bg-gray-100 p-6">
       <Text className="text-2xl font-bold text-gray-800 text-center mb-8 tracking-tight">
-        {isNew ? "Add New Task" : "Edit Task"}
+        {isNew ? "Add New Journal Entry" : "Edit Journal Entry"}
       </Text>
 
       <TextInput
-        placeholder="Task Title"
+        placeholder="Journal Title"
         value={title}
         onChangeText={setTitle}
         className="border border-gray-200 rounded-xl px-5 py-4 mb-5 bg-white shadow-sm text-gray-700 text-base font-medium"
@@ -66,7 +68,7 @@ const TaskFormScreen = () => {
       />
 
       <TextInput
-        placeholder="Task Description"
+        placeholder="Write your thoughts here..."
         value={description}
         onChangeText={setDescription}
         className="border border-gray-200 rounded-xl px-5 py-4 mb-5 bg-white shadow-sm text-gray-700 text-base font-medium h-36"
@@ -79,11 +81,11 @@ const TaskFormScreen = () => {
         onPress={handleSubmit}
       >
         <Text className="text-white text-center font-semibold text-lg tracking-wide">
-          {isNew ? "Create Task" : "Update Task"}
+          {isNew ? "Create Journal Entry" : "Update Journal Entry"}
         </Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default TaskFormScreen;
+export default JournalFormScreen;

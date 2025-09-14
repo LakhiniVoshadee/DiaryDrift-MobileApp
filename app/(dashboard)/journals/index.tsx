@@ -1,5 +1,5 @@
-import { getAllTaskData, deleteTask } from "@/services/taskService";
-import { Task } from "@/types/tasks";
+import { getAllJournalData, deleteJournal } from "@/services/journalService";
+import { Journal } from "@/types/journal";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter, useSegments } from "expo-router";
 import React, { useEffect, useState } from "react";
@@ -12,15 +12,15 @@ import {
   View,
 } from "react-native";
 
-const TaskScreen = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+const JournalScreen = () => {
+  const [journals, setJournals] = useState<Journal[]>([]);
   const router = useRouter();
   const segment = useSegments();
 
   const handleFetchData = async () => {
     try {
-      const data = await getAllTaskData();
-      setTasks(data);
+      const data = await getAllJournalData();
+      setJournals(data);
     } catch (err) {
       console.error(err);
     }
@@ -30,10 +30,10 @@ const TaskScreen = () => {
     handleFetchData();
   }, [segment]);
 
-  const handleDelete = (taskId: string) => {
+  const handleDelete = (journalId: string) => {
     Alert.alert(
-      "Delete Task",
-      "Are you sure you want to delete this task?",
+      "Delete Entry",
+      "Are you sure you want to delete this journal entry?",
       [
         { text: "Cancel", style: "cancel" },
         {
@@ -41,10 +41,10 @@ const TaskScreen = () => {
           style: "destructive",
           onPress: async () => {
             try {
-              await deleteTask(taskId);
-              await handleFetchData(); // Refetch after deletion!
+              await deleteJournal(journalId);
+              await handleFetchData();
             } catch (err) {
-              Alert.alert("Error", "Could not delete task.");
+              Alert.alert("Error", "Could not delete journal entry.");
             }
           },
         },
@@ -52,38 +52,38 @@ const TaskScreen = () => {
     );
   };
 
-  const handleEdit = (taskId: string) => {
-    router.push(`/(dashboard)/tasks/${taskId}`);
+  const handleEdit = (journalId: string) => {
+    router.push(`../journals/${journalId}`);
   };
 
   return (
     <View className="flex-1 w-full justify-center items-center">
-      <Text className="text-4xl text-center">Task Screen</Text>
+      <Text className="text-4xl text-center">Journal</Text>
       <View className="absolute bottom-6 right-5">
-        <Pressable onPress={() => router.push("/(dashboard)/tasks/new")}>
+        <Pressable onPress={() => router.push("../journals/new")}>
           <Ionicons name="add-circle-sharp" size={60} color="black" />
         </Pressable>
       </View>
       <ScrollView className="mt-4">
-        {tasks.map((task) => (
+        {journals.map((journal) => (
           <View
-            key={task.id}
+            key={journal.id}
             className="bg-gray-200 p-4 mb-3 rounded-lg mx-4 border border-gray-400"
           >
-            <Text className="text-lg font-semibold">{task.title}</Text>
+            <Text className="text-lg font-semibold">{journal.title}</Text>
             <Text className="text-sm text-gray-700 mb-2">
-              {task.description}
+              {journal.description}
             </Text>
             <View className="flex-row">
               <TouchableOpacity
                 className="bg-yellow-300 px-3 py-1 rounded mr-2"
-                onPress={() => handleEdit(task.id!)}
+                onPress={() => handleEdit(journal.id!)}
               >
                 <Text className="text-xl">Edit</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 className="bg-red-500 px-3 py-1 rounded"
-                onPress={() => handleDelete(task.id!)}
+                onPress={() => handleDelete(journal.id!)}
               >
                 <Text className="text-xl">Delete</Text>
               </TouchableOpacity>
@@ -95,4 +95,4 @@ const TaskScreen = () => {
   );
 };
 
-export default TaskScreen;
+export default JournalScreen;

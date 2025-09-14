@@ -1,5 +1,6 @@
 import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
 import React from "react";
+import { router } from "expo-router";
 
 const Home = () => {
   return (
@@ -22,7 +23,7 @@ const Home = () => {
           {/* Today's Entry */}
           <View className="mb-6">
             <Text className="text-gray-800 text-lg font-semibold mb-3">
-              Today's Reflection
+              Today&apos;s Reflection
             </Text>
             <View className="flex-row items-center">
               <View className="h-16 w-16 bg-[#E6CFFF] rounded-full items-center justify-center">
@@ -37,7 +38,7 @@ const Home = () => {
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={() => router.push("/new-entry")}
+                onPress={() => router.push("../new-entry")}
                 className="bg-[#A084DC] p-2 rounded-full"
               >
                 <Text className="text-white text-sm font-medium">✍️</Text>
@@ -63,10 +64,10 @@ const Home = () => {
                 }}
                 onPress={() =>
                   item === "Memories"
-                    ? router.push("/memories")
+                    ? router.push("../memories")
                     : item === "Mood"
-                    ? router.push("/mood")
-                    : router.push("/insights")
+                    ? router.push("../mood")
+                    : router.push("../insights")
                 }
               >
                 <View className="h-12 w-12 bg-[#D3BDF3] rounded-full items-center justify-center mb-2">

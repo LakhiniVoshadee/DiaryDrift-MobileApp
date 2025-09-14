@@ -1,7 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Feather from "@expo/vector-icons/Feather";
 import { Tabs, useRouter } from "expo-router";
 import React, { useEffect } from "react";
@@ -84,35 +82,11 @@ const DashBoardLayout = () => {
             ),
           }}
         />
+        
         <Tabs.Screen
-          name="tasks/index"
+          name="journals"
           options={{
-            title: "Tasks",
-            tabBarIcon: ({ color, focused }) => (
-              <View
-                style={{
-                  backgroundColor: focused ? "#8B7CF6" : "transparent",
-                  borderRadius: 12,
-                  padding: focused ? 8 : 0,
-                  width: focused ? 40 : 24,
-                  height: focused ? 40 : 24,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <MaterialIcons
-                  name="checklist"
-                  size={20}
-                  color={focused ? "#FFFFFF" : color}
-                />
-              </View>
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="journal"
-          options={{
-            title: "Journal",
+            title: "Journals",
             tabBarIcon: ({ color, focused }) => (
               <View
                 style={{

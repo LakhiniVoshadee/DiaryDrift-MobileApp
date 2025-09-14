@@ -1,14 +1,13 @@
 import { Stack } from "expo-router";
 import React from "react";
 
-const TaskLayout = () => {
+const JournalLayout = () => {
   return (
     <Stack screenOptions={{ animation: "slide_from_right" }}>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-
-      <Stack.Screen name="[id]" options={{ title: "Task Form" }} />
+      <Stack.Screen name="[id]" options={{ title: "Journal Entry" }} />
     </Stack>
   );
 };
 
-export default TaskLayout;
+export default JournalLayout;
