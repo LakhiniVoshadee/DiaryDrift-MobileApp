@@ -57,40 +57,159 @@ const JournalScreen = () => {
   };
 
   return (
-    <View className="flex-1 w-full justify-center items-center">
-      <Text className="text-4xl text-center">Journal</Text>
-      <View className="absolute bottom-6 right-5">
-        <Pressable onPress={() => router.push("../journals/new")}>
-          <Ionicons name="add-circle-sharp" size={60} color="black" />
-        </Pressable>
+    <View 
+      className="flex-1" 
+      style={{ backgroundColor: '#F8F4FF' }}
+    >
+      {/* Background Decorative Elements */}
+      <View 
+        className="absolute -top-20 -right-20 opacity-10"
+        style={{
+          width: 200,
+          height: 200,
+          backgroundColor: '#F472B6',
+          borderRadius: 100,
+        }}
+      />
+      <View 
+        className="absolute -bottom-32 -left-16 opacity-10"
+        style={{
+          width: 160,
+          height: 160,
+          backgroundColor: '#A855F7',
+          borderRadius: 80,
+        }}
+      />
+
+      {/* Header Section */}
+      <View className="pt-16 pb-8 px-6">
+        <Text className="text-5xl font-light text-gray-800 text-center tracking-wide">
+          Journal
+        </Text>
+        <Text className="text-lg text-gray-500 text-center mt-2 font-light">
+          Your thoughts, beautifully organized
+        </Text>
       </View>
-      <ScrollView className="mt-4">
-        {journals.map((journal) => (
-          <View
-            key={journal.id}
-            className="bg-gray-200 p-4 mb-3 rounded-lg mx-4 border border-gray-400"
-          >
-            <Text className="text-lg font-semibold">{journal.title}</Text>
-            <Text className="text-sm text-gray-700 mb-2">
-              {journal.description}
-            </Text>
-            <View className="flex-row">
-              <TouchableOpacity
-                className="bg-yellow-300 px-3 py-1 rounded mr-2"
-                onPress={() => handleEdit(journal.id!)}
-              >
-                <Text className="text-xl">Edit</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                className="bg-red-500 px-3 py-1 rounded"
-                onPress={() => handleDelete(journal.id!)}
-              >
-                <Text className="text-xl">Delete</Text>
-              </TouchableOpacity>
+
+      {/* Content Area */}
+      <View className="flex-1 px-4">
+        {journals.length === 0 ? (
+          <View className="flex-1 justify-center items-center">
+            <View className="bg-white/70 rounded-3xl p-8 mx-4 shadow-lg border border-purple-100">
+              <Ionicons 
+                name="journal-outline" 
+                size={80} 
+                color="#A855F7" 
+                style={{ alignSelf: 'center', marginBottom: 16 }} 
+              />
+              <Text className="text-2xl text-gray-700 text-center font-light mb-2">
+                No entries yet
+              </Text>
+              <Text className="text-base text-gray-500 text-center">
+                Start writing your story
+              </Text>
             </View>
           </View>
-        ))}
-      </ScrollView>
+        ) : (
+          <ScrollView 
+            className="flex-1"
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 100 }}
+          >
+            {journals.map((journal, index) => (
+              <View
+                key={journal.id}
+                className="mb-6 mx-2"
+                style={{
+                  transform: [{ scale: 1 - (index * 0.002) }],
+                }}
+              >
+                <View 
+                  className="bg-white/80 rounded-2xl p-6 border border-purple-100/50"
+                  style={{
+                    shadowColor: '#A855F7',
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: 0.1,
+                    shadowRadius: 12,
+                    elevation: 8,
+                  }}
+                >
+                  {/* Content */}
+                  <View className="mb-6">
+                    <Text className="text-2xl font-medium text-gray-800 mb-3 leading-7">
+                      {journal.title}
+                    </Text>
+                    <Text className="text-base text-gray-600 leading-6 font-light">
+                      {journal.description}
+                    </Text>
+                  </View>
+                  
+                  {/* Action Buttons */}
+                  <View className="flex-row justify-end space-x-3">
+                    <TouchableOpacity
+                      className="px-6 py-3 rounded-xl"
+                      onPress={() => handleEdit(journal.id!)}
+                      style={{
+                        backgroundColor: '#A855F7',
+                        shadowColor: '#A855F7',
+                        shadowOffset: { width: 0, height: 4 },
+                        shadowOpacity: 0.3,
+                        shadowRadius: 8,
+                        elevation: 4,
+                      }}
+                    >
+                      <View className="flex-row items-center">
+                        <Ionicons name="create-outline" size={18} color="white" />
+                        <Text className="text-white font-medium ml-2 text-base">
+                          Edit
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                    
+                    <TouchableOpacity
+                      className="px-6 py-3 rounded-xl"
+                      onPress={() => handleDelete(journal.id!)}
+                      style={{
+                        backgroundColor: '#EF4444',
+                        shadowColor: '#EF4444',
+                        shadowOffset: { width: 0, height: 4 },
+                        shadowOpacity: 0.3,
+                        shadowRadius: 8,
+                        elevation: 4,
+                      }}
+                    >
+                      <View className="flex-row items-center">
+                        <Ionicons name="trash-outline" size={18} color="white" />
+                        <Text className="text-white font-medium ml-2 text-base">
+                          Delete
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            ))}
+          </ScrollView>
+        )}
+      </View>
+
+      {/* Floating Add Button */}
+      <View className="absolute bottom-8 right-6">
+        <Pressable 
+          onPress={() => router.push("../journals/new")}
+          className="rounded-full p-4"
+          style={{
+            backgroundColor: '#7C3AED',
+            shadowColor: '#7C3AED',
+            shadowOffset: { width: 0, height: 8 },
+            shadowOpacity: 0.4,
+            shadowRadius: 16,
+            elevation: 8,
+          }}
+        >
+          <Ionicons name="add" size={32} color="white" />
+        </Pressable>
+      </View>
     </View>
   );
 };
