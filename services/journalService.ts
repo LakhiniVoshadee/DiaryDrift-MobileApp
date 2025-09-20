@@ -13,7 +13,9 @@ import {
 export const journalColRef = collection(db, "journals");
 
 // CREATE
-export const createJournal = async (journal: Omit<Journal, "id" | "dateCreated" | "dateModified">) => {
+export const createJournal = async (
+  journal: Omit<Journal, "id" | "dateCreated" | "dateModified">
+) => {
   const now = new Date().toISOString();
   const docRef = await addDoc(journalColRef, {
     ...journal,
@@ -44,7 +46,10 @@ export const getJournalById = async (id: string): Promise<Journal | null> => {
 };
 
 // UPDATE
-export const updateJournal = async (id: string, journal: Omit<Journal, "id" | "dateCreated" | "dateModified">) => {
+export const updateJournal = async (
+  id: string,
+  journal: Omit<Journal, "id" | "dateCreated" | "dateModified">
+) => {
   const docRef = doc(db, "journals", id);
   await updateDoc(docRef, {
     ...journal,

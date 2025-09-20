@@ -4,6 +4,6 @@ export interface Journal {
   description: string;
   dateCreated?: string;
   dateModified?: string;
-  photoUrl?: string;
-  voiceNoteUrl?: string;
+  photoBase64?: string;
+  voiceNoteBase64?: string;
 }

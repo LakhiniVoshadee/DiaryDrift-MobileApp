@@ -10,6 +10,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from "react-native";
 
 const JournalScreen = () => {
@@ -43,7 +44,7 @@ const JournalScreen = () => {
             try {
               await deleteJournal(journalId);
               await handleFetchData();
-            } catch (err) {
+            } catch {
               Alert.alert("Error", "Could not delete journal entry.");
             }
           },
@@ -57,26 +58,23 @@ const JournalScreen = () => {
   };
 
   return (
-    <View 
-      className="flex-1" 
-      style={{ backgroundColor: '#F8F4FF' }}
-    >
+    <View className="flex-1" style={{ backgroundColor: "#F8F4FF" }}>
       {/* Background Decorative Elements */}
-      <View 
+      <View
         className="absolute -top-20 -right-20 opacity-10"
         style={{
           width: 200,
           height: 200,
-          backgroundColor: '#F472B6',
+          backgroundColor: "#F472B6",
           borderRadius: 100,
         }}
       />
-      <View 
+      <View
         className="absolute -bottom-32 -left-16 opacity-10"
         style={{
           width: 160,
           height: 160,
-          backgroundColor: '#A855F7',
+          backgroundColor: "#A855F7",
           borderRadius: 80,
         }}
       />
@@ -96,11 +94,11 @@ const JournalScreen = () => {
         {journals.length === 0 ? (
           <View className="flex-1 justify-center items-center">
             <View className="bg-white/70 rounded-3xl p-8 mx-4 shadow-lg border border-purple-100">
-              <Ionicons 
-                name="journal-outline" 
-                size={80} 
-                color="#A855F7" 
-                style={{ alignSelf: 'center', marginBottom: 16 }} 
+              <Ionicons
+                name="journal-outline"
+                size={80}
+                color="#A855F7"
+                style={{ alignSelf: "center", marginBottom: 16 }}
               />
               <Text className="text-2xl text-gray-700 text-center font-light mb-2">
                 No entries yet
@@ -111,7 +109,7 @@ const JournalScreen = () => {
             </View>
           </View>
         ) : (
-          <ScrollView 
+          <ScrollView
             className="flex-1"
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 100 }}
@@ -121,13 +119,13 @@ const JournalScreen = () => {
                 key={journal.id}
                 className="mb-6 mx-2"
                 style={{
-                  transform: [{ scale: 1 - (index * 0.002) }],
+                  transform: [{ scale: 1 - index * 0.002 }],
                 }}
               >
-                <View 
+                <View
                   className="bg-white/80 rounded-2xl p-6 border border-purple-100/50"
                   style={{
-                    shadowColor: '#A855F7',
+                    shadowColor: "#A855F7",
                     shadowOffset: { width: 0, height: 4 },
                     shadowOpacity: 0.1,
                     shadowRadius: 12,
@@ -142,16 +140,47 @@ const JournalScreen = () => {
                     <Text className="text-base text-gray-600 leading-6 font-light">
                       {journal.description}
                     </Text>
+
+                    {/* Display photo if exists */}
+                    {journal.photoBase64 && (
+                      <View className="mt-3">
+                        <Image
+                          source={{
+                            uri: `data:image/jpeg;base64,${journal.photoBase64}`,
+                          }}
+                          style={{
+                            width: "100%",
+                            height: 160,
+                            borderRadius: 8,
+                          }}
+                          resizeMode="cover"
+                        />
+                      </View>
+                    )}
+
+                    {/* Display voice note indicator if exists */}
+                    {journal.voiceNoteBase64 && (
+                      <View className="flex-row items-center mt-3 bg-purple-50 p-3 rounded-lg">
+                        <Ionicons
+                          name="mic-outline"
+                          size={20}
+                          color="#7C3AED"
+                        />
+                        <Text className="text-purple-700 ml-2">
+                          Voice Memo Available
+                        </Text>
+                      </View>
+                    )}
                   </View>
-                  
+
                   {/* Action Buttons */}
                   <View className="flex-row justify-end space-x-3">
                     <TouchableOpacity
                       className="px-6 py-3 rounded-xl"
                       onPress={() => handleEdit(journal.id!)}
                       style={{
-                        backgroundColor: '#A855F7',
-                        shadowColor: '#A855F7',
+                        backgroundColor: "#A855F7",
+                        shadowColor: "#A855F7",
                         shadowOffset: { width: 0, height: 4 },
                         shadowOpacity: 0.3,
                         shadowRadius: 8,
@@ -159,19 +188,23 @@ const JournalScreen = () => {
                       }}
                     >
                       <View className="flex-row items-center">
-                        <Ionicons name="create-outline" size={18} color="white" />
+                        <Ionicons
+                          name="create-outline"
+                          size={18}
+                          color="white"
+                        />
                         <Text className="text-white font-medium ml-2 text-base">
                           Edit
                         </Text>
                       </View>
                     </TouchableOpacity>
-                    
+
                     <TouchableOpacity
                       className="px-6 py-3 rounded-xl"
                       onPress={() => handleDelete(journal.id!)}
                       style={{
-                        backgroundColor: '#EF4444',
-                        shadowColor: '#EF4444',
+                        backgroundColor: "#EF4444",
+                        shadowColor: "#EF4444",
                         shadowOffset: { width: 0, height: 4 },
                         shadowOpacity: 0.3,
                         shadowRadius: 8,
@@ -179,7 +212,11 @@ const JournalScreen = () => {
                       }}
                     >
                       <View className="flex-row items-center">
-                        <Ionicons name="trash-outline" size={18} color="white" />
+                        <Ionicons
+                          name="trash-outline"
+                          size={18}
+                          color="white"
+                        />
                         <Text className="text-white font-medium ml-2 text-base">
                           Delete
                         </Text>
@@ -195,12 +232,12 @@ const JournalScreen = () => {
 
       {/* Floating Add Button */}
       <View className="absolute bottom-8 right-6">
-        <Pressable 
+        <Pressable
           onPress={() => router.push("../journals/new")}
           className="rounded-full p-4"
           style={{
-            backgroundColor: '#7C3AED',
-            shadowColor: '#7C3AED',
+            backgroundColor: "#7C3AED",
+            shadowColor: "#7C3AED",
             shadowOffset: { width: 0, height: 8 },
             shadowOpacity: 0.4,
             shadowRadius: 16,
