@@ -94,7 +94,7 @@ const JournalScreen = () => {
   };
 
   return (
-    <View className="flex-1" style={{ backgroundColor: "#FFF8F3" }}>
+    <View className="flex-1" style={{ backgroundColor: "#E6D7FF" }}>
       {/* Header Section */}
       <View className="pt-16 pb-8 px-6">
         <Text
@@ -120,7 +120,7 @@ const JournalScreen = () => {
               style={{
                 backgroundColor: "#FFE5CC",
                 borderWidth: 1,
-                borderColor: "rgba(255, 154, 107, 0.2)",
+                borderColor: "rgba(160, 132, 220, 0.2)",
               }}
             >
               <View className="items-center">
@@ -166,7 +166,7 @@ const JournalScreen = () => {
                 className="absolute left-12 top-0 bottom-0"
                 style={{
                   width: 2,
-                  backgroundColor: "#E0E0E0",
+                  backgroundColor: "#A084DC", // Changed from yellow to aesthetic purple
                   marginLeft: 20,
                 }}
               />
@@ -215,7 +215,7 @@ const JournalScreen = () => {
                         style={{
                           backgroundColor: colorScheme.bg,
                           borderWidth: 1,
-                          borderColor: "rgba(255, 255, 255, 0.5)",
+                          borderColor: "rgba(160, 132, 220, 0.2)",
                           shadowColor: "#000",
                           shadowOffset: { width: 0, height: 2 },
                           shadowOpacity: 0.1,
@@ -404,14 +404,16 @@ const JournalScreen = () => {
             width: 60,
             height: 60,
             borderRadius: 30,
-            backgroundColor: "#FF9A6B",
+            backgroundColor: "#A084DC",
             justifyContent: "center",
             alignItems: "center",
-            shadowColor: "#FF9A6B",
+            shadowColor: "#A084DC",
             shadowOffset: { width: 0, height: 8 },
             shadowOpacity: 0.4,
             shadowRadius: 16,
             elevation: 8,
+            borderWidth: 2,
+            borderColor: "#8B5CF6",
           }}
         >
           <Ionicons name="add" size={28} color="white" />
