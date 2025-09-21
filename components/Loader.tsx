@@ -7,12 +7,6 @@ interface LoaderProps {
 
 const Loader: React.FC<LoaderProps> = ({ visible }) => {
   if (!visible) return null;
-
-  return (
-    <View>
-      <Text>Loader</Text>
-    </View>
-  );
 };
 
 export default Loader;
