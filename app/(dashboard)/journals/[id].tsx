@@ -314,13 +314,13 @@ const JournalFormScreen = () => {
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.8)",
                 borderRadius: 20,
-                borderWidth: 1,
-                borderColor: "rgba(200, 168, 233, 0.3)",
+                borderWidth: 3, // Thicker purple border
+                borderColor: "#C8A8E9", // Aesthetic purple
                 shadowColor: "#C8A8E9",
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 8,
-                elevation: 3,
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 10,
+                elevation: 5,
               }}
             >
               <TextInput
@@ -354,13 +354,13 @@ const JournalFormScreen = () => {
               style={{
                 backgroundColor: "rgba(255, 255, 255, 0.8)",
                 borderRadius: 20,
-                borderWidth: 1,
-                borderColor: "rgba(200, 168, 233, 0.3)",
+                borderWidth: 3, // Thicker purple border
+                borderColor: "#C8A8E9", // Aesthetic purple
                 shadowColor: "#C8A8E9",
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 8,
-                elevation: 3,
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 10,
+                elevation: 5,
               }}
             >
               <TextInput

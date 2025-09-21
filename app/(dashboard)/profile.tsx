@@ -343,7 +343,7 @@ const Profile = () => {
             textShadowRadius: 2,
           }}
         >
-          {userProfile?.fullName || "User"}
+          {userProfile?.fullName || currentUser?.displayName || "Not set"}
         </Text>
 
         <TouchableOpacity
@@ -403,8 +403,8 @@ const Profile = () => {
           shadowRadius: 24,
           elevation: 10,
           marginBottom: 30,
-          borderWidth: 3, // Increased border width for a prominent frame
-          borderColor: "#D4A4EB", // Purple frame
+          borderWidth: 3,
+          borderColor: "#D4A4EB",
           borderStyle: "solid",
         }}
       >
@@ -467,7 +467,7 @@ const Profile = () => {
               fontWeight: "700",
             }}
           >
-            {userProfile?.fullName || "Not set"}
+            {userProfile?.fullName || currentUser?.displayName || "Not set"}
           </Text>
         </View>
 
@@ -512,8 +512,8 @@ const Profile = () => {
             shadowOpacity: 0.2,
             shadowRadius: 12,
             elevation: 6,
-            borderWidth: 3, // Increased border width for a prominent frame
-            borderColor: "#D4A4EB", // Purple frame
+            borderWidth: 3,
+            borderColor: "#D4A4EB",
             borderStyle: "solid",
           }}
         >
@@ -561,8 +561,8 @@ const Profile = () => {
             shadowOpacity: 0.2,
             shadowRadius: 12,
             elevation: 6,
-            borderWidth: 3, // Increased border width for a prominent frame
-            borderColor: "#D4A4EB", // Purple frame
+            borderWidth: 3,
+            borderColor: "#D4A4EB",
             borderStyle: "solid",
           }}
         >
@@ -609,8 +609,8 @@ const Profile = () => {
             shadowOpacity: 0.2,
             shadowRadius: 12,
             elevation: 6,
-            borderWidth: 3, // Increased border width for a prominent frame
-            borderColor: "#D4A4EB", // Purple frame
+            borderWidth: 3,
+            borderColor: "#D4A4EB",
             borderStyle: "solid",
           }}
         >
