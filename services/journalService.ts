@@ -12,7 +12,6 @@ import {
 
 export const journalColRef = collection(db, "journals");
 
-// CREATE
 export const createJournal = async (
   journal: Omit<Journal, "id" | "dateCreated" | "dateModified">
 ) => {
@@ -25,7 +24,6 @@ export const createJournal = async (
   return docRef.id;
 };
 
-// READ ALL
 export const getAllJournalData = async (): Promise<Journal[]> => {
   const snapshot = await getDocs(journalColRef);
   return snapshot.docs.map((journalRef) => ({
@@ -34,7 +32,6 @@ export const getAllJournalData = async (): Promise<Journal[]> => {
   })) as Journal[];
 };
 
-// READ ONE
 export const getJournalById = async (id: string): Promise<Journal | null> => {
   const journalDocRef = doc(db, "journals", id);
   const snapshot = await getDoc(journalDocRef);
@@ -45,7 +42,6 @@ export const getJournalById = async (id: string): Promise<Journal | null> => {
   } as Journal;
 };
 
-// UPDATE
 export const updateJournal = async (
   id: string,
   journal: Omit<Journal, "id" | "dateCreated" | "dateModified">

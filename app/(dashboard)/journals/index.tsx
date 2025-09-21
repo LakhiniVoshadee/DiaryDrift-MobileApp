@@ -13,6 +13,15 @@ import {
   Image,
 } from "react-native";
 
+// Define mood icons and colors mapping
+const moodIcons = {
+  happy: { icon: "happy-outline", color: "#4CAF50" },
+  sad: { icon: "sad-outline", color: "#2196F3" },
+  angry: { icon: "flame-outline", color: "#FF5722" },
+  excited: { icon: "star-outline", color: "#FFC107" },
+  relaxed: { icon: "leaf-outline", color: "#8BC34A" },
+};
+
 const JournalScreen = () => {
   const [journals, setJournals] = useState<Journal[]>([]);
   const router = useRouter();
@@ -55,6 +64,14 @@ const JournalScreen = () => {
 
   const handleEdit = (journalId: string) => {
     router.push(`../journals/${journalId}`);
+  };
+
+  // Helper function to get mood display information
+  const getMoodDisplay = (moodValue: string | undefined) => {
+    if (!moodValue || !moodIcons[moodValue as keyof typeof moodIcons]) {
+      return { icon: "help-circle-outline", color: "#9E9E9E" };
+    }
+    return moodIcons[moodValue as keyof typeof moodIcons];
   };
 
   return (
@@ -132,11 +149,32 @@ const JournalScreen = () => {
                     elevation: 8,
                   }}
                 >
-                  {/* Content */}
-                  <View className="mb-6">
-                    <Text className="text-2xl font-medium text-gray-800 mb-3 leading-7">
+                  {/* Journal Header with Title and Mood */}
+                  <View className="flex-row justify-between items-center mb-3">
+                    <Text className="text-2xl font-medium text-gray-800 leading-7 flex-1">
                       {journal.title}
                     </Text>
+
+                    {journal.mood && (
+                      <View
+                        className="rounded-full p-2"
+                        style={{
+                          backgroundColor: `${
+                            getMoodDisplay(journal.mood).color
+                          }15`,
+                        }}
+                      >
+                        <Ionicons
+                          name={getMoodDisplay(journal.mood).icon as any}
+                          size={24}
+                          color={getMoodDisplay(journal.mood).color}
+                        />
+                      </View>
+                    )}
+                  </View>
+
+                  {/* Content */}
+                  <View className="mb-6">
                     <Text className="text-base text-gray-600 leading-6 font-light">
                       {journal.description}
                     </Text>

@@ -19,6 +19,25 @@ import * as ImagePicker from "expo-image-picker";
 import { Audio } from "expo-av";
 import { Ionicons } from "@expo/vector-icons";
 
+// Define mood options
+const moodOptions = [
+  { value: "happy", label: "Happy", icon: "happy-outline", color: "#4CAF50" },
+  { value: "sad", label: "Sad", icon: "sad-outline", color: "#2196F3" },
+  { value: "angry", label: "Angry", icon: "flame-outline", color: "#FF5722" },
+  {
+    value: "excited",
+    label: "Excited",
+    icon: "star-outline",
+    color: "#FFC107",
+  },
+  {
+    value: "relaxed",
+    label: "Relaxed",
+    icon: "leaf-outline",
+    color: "#8BC34A",
+  },
+];
+
 const JournalFormScreen = () => {
   const { id } = useLocalSearchParams<{ id?: string }>();
   const isNew = !id || id === "new";
@@ -29,6 +48,7 @@ const JournalFormScreen = () => {
   const [voiceNoteBase64, setVoiceNoteBase64] = useState<string | null>(null);
   const [recording, setRecording] = useState<Audio.Recording | null>(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [mood, setMood] = useState<string | null>(null); // Added mood state
 
   const router = useRouter();
   const { hideLoader, showLoader } = useLoader();
@@ -45,6 +65,7 @@ const JournalFormScreen = () => {
             if (journal.photoBase64) setPhotoBase64(journal.photoBase64);
             if (journal.voiceNoteBase64)
               setVoiceNoteBase64(journal.voiceNoteBase64);
+            if (journal.mood) setMood(journal.mood); // Load saved mood
           }
         } finally {
           hideLoader();
@@ -166,6 +187,7 @@ const JournalFormScreen = () => {
         description,
         photoBase64: photoBase64 || undefined,
         voiceNoteBase64: voiceNoteBase64 || undefined,
+        mood: mood || undefined, // Include mood in journal data
       };
 
       if (isNew) {
@@ -230,6 +252,41 @@ const JournalFormScreen = () => {
           multiline
           placeholderTextColor="#9CA3AF"
         />
+
+        {/* Mood Selection Section */}
+        <View className="mb-5">
+          <Text className="text-gray-700 font-medium mb-2">
+            How are you feeling?
+          </Text>
+          <View className="flex-row justify-between bg-white p-4 rounded-lg">
+            {moodOptions.map((option) => (
+              <TouchableOpacity
+                key={option.value}
+                onPress={() => setMood(option.value)}
+                className={`items-center justify-center p-3 rounded-full ${
+                  mood === option.value ? "bg-purple-100" : ""
+                }`}
+                style={{
+                  borderWidth: mood === option.value ? 2 : 0,
+                  borderColor: option.color,
+                }}
+              >
+                <Ionicons
+                  name={option.icon as any}
+                  size={28}
+                  color={mood === option.value ? option.color : "#9CA3AF"}
+                />
+                <Text
+                  className={`text-xs mt-1 ${
+                    mood === option.value ? "font-medium" : "text-gray-500"
+                  }`}
+                >
+                  {option.label}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
 
         {/* Photo Section */}
         <View className="mb-5">

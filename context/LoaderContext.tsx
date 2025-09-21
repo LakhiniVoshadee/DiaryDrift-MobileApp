@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import Loader from "@/components/Loader";
 

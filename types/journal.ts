@@ -6,4 +6,5 @@ export interface Journal {
   dateModified?: string;
   photoBase64?: string;
   voiceNoteBase64?: string;
+  mood?: string;
 }
