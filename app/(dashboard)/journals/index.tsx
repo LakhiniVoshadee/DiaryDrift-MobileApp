@@ -13,14 +13,24 @@ import {
   Image,
 } from "react-native";
 
-// Define mood icons and colors mapping
+// Define mood icons and colors mapping with pastel colors
 const moodIcons = {
-  happy: { icon: "happy-outline", color: "#4CAF50" },
-  sad: { icon: "sad-outline", color: "#2196F3" },
-  angry: { icon: "flame-outline", color: "#FF5722" },
-  excited: { icon: "star-outline", color: "#FFC107" },
-  relaxed: { icon: "leaf-outline", color: "#8BC34A" },
+  happy: { icon: "happy-outline", color: "#FFB5D1", bgColor: "#FFF0F5" },
+  sad: { icon: "sad-outline", color: "#A8D8FF", bgColor: "#F0F8FF" },
+  angry: { icon: "flame-outline", color: "#FFB3BA", bgColor: "#FFF5F5" },
+  excited: { icon: "star-outline", color: "#FFDFBA", bgColor: "#FFFBF0" },
+  relaxed: { icon: "leaf-outline", color: "#BAFFC9", bgColor: "#F0FFF4" },
 };
+
+// Pastel colors for journal entries
+const pastelColors = [
+  { bg: "#FFE5CC", pill: "#FF9A6B", text: "#8B4513" }, // Peach
+  { bg: "#E5CCFF", pill: "#C788FF", text: "#6A4C93" }, // Purple
+  { bg: "#CCFFE5", pill: "#6BFF9A", text: "#2E8B57" }, // Mint
+  { bg: "#FFE5E5", pill: "#FF8A8A", text: "#CD5C5C" }, // Pink
+  { bg: "#E5F3FF", pill: "#8AC6FF", text: "#4682B4" }, // Blue
+  { bg: "#FFF5CC", pill: "#FFD93D", text: "#DAA520" }, // Yellow
+];
 
 const JournalScreen = () => {
   const [journals, setJournals] = useState<Journal[]>([]);
@@ -69,220 +79,342 @@ const JournalScreen = () => {
   // Helper function to get mood display information
   const getMoodDisplay = (moodValue: string | undefined) => {
     if (!moodValue || !moodIcons[moodValue as keyof typeof moodIcons]) {
-      return { icon: "help-circle-outline", color: "#9E9E9E" };
+      return {
+        icon: "help-circle-outline",
+        color: "#9E9E9E",
+        bgColor: "#F5F5F5",
+      };
     }
     return moodIcons[moodValue as keyof typeof moodIcons];
   };
 
-  return (
-    <View className="flex-1" style={{ backgroundColor: "#F8F4FF" }}>
-      {/* Background Decorative Elements */}
-      <View
-        className="absolute -top-20 -right-20 opacity-10"
-        style={{
-          width: 200,
-          height: 200,
-          backgroundColor: "#F472B6",
-          borderRadius: 100,
-        }}
-      />
-      <View
-        className="absolute -bottom-32 -left-16 opacity-10"
-        style={{
-          width: 160,
-          height: 160,
-          backgroundColor: "#A855F7",
-          borderRadius: 80,
-        }}
-      />
+  // Get color scheme for each journal entry
+  const getColorScheme = (index: number) => {
+    return pastelColors[index % pastelColors.length];
+  };
 
+  return (
+    <View className="flex-1" style={{ backgroundColor: "#FFF8F3" }}>
       {/* Header Section */}
       <View className="pt-16 pb-8 px-6">
-        <Text className="text-5xl font-light text-gray-800 text-center tracking-wide">
-          Journal
+        <Text
+          className="text-4xl text-gray-800 text-center mb-2"
+          style={{
+            fontWeight: "300",
+            letterSpacing: 1,
+          }}
+        >
+          My Journal
         </Text>
-        <Text className="text-lg text-gray-500 text-center mt-2 font-light">
-          Your thoughts, beautifully organized
+        <Text className="text-base text-gray-500 text-center font-light">
+          Daily reflections & memories
         </Text>
       </View>
 
       {/* Content Area */}
-      <View className="flex-1 px-4">
+      <View className="flex-1 px-6">
         {journals.length === 0 ? (
           <View className="flex-1 justify-center items-center">
-            <View className="bg-white/70 rounded-3xl p-8 mx-4 shadow-lg border border-purple-100">
-              <Ionicons
-                name="journal-outline"
-                size={80}
-                color="#A855F7"
-                style={{ alignSelf: "center", marginBottom: 16 }}
-              />
-              <Text className="text-2xl text-gray-700 text-center font-light mb-2">
-                No entries yet
-              </Text>
-              <Text className="text-base text-gray-500 text-center">
-                Start writing your story
-              </Text>
+            <View
+              className="p-12 mx-4 rounded-3xl"
+              style={{
+                backgroundColor: "#FFE5CC",
+                borderWidth: 1,
+                borderColor: "rgba(255, 154, 107, 0.2)",
+              }}
+            >
+              <View className="items-center">
+                <View
+                  style={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 40,
+                    backgroundColor: "#FF9A6B",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginBottom: 20,
+                  }}
+                >
+                  <Ionicons name="journal-outline" size={36} color="white" />
+                </View>
+                <Text
+                  className="text-xl text-center font-light mb-2"
+                  style={{ color: "#8B4513" }}
+                >
+                  Start your journey
+                </Text>
+                <Text
+                  className="text-sm text-center leading-5"
+                  style={{ color: "#A0522D" }}
+                >
+                  Create your first entry to begin{"\n"}capturing precious
+                  moments
+                </Text>
+              </View>
             </View>
           </View>
         ) : (
           <ScrollView
             className="flex-1"
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 100 }}
+            contentContainerStyle={{ paddingBottom: 120 }}
           >
-            {journals.map((journal, index) => (
+            {/* Timeline Container */}
+            <View className="relative">
+              {/* Timeline Line */}
               <View
-                key={journal.id}
-                className="mb-6 mx-2"
+                className="absolute left-12 top-0 bottom-0"
                 style={{
-                  transform: [{ scale: 1 - index * 0.002 }],
+                  width: 2,
+                  backgroundColor: "#E0E0E0",
+                  marginLeft: 20,
                 }}
-              >
-                <View
-                  className="bg-white/80 rounded-2xl p-6 border border-purple-100/50"
-                  style={{
-                    shadowColor: "#A855F7",
-                    shadowOffset: { width: 0, height: 4 },
-                    shadowOpacity: 0.1,
-                    shadowRadius: 12,
-                    elevation: 8,
-                  }}
-                >
-                  {/* Journal Header with Title and Mood */}
-                  <View className="flex-row justify-between items-center mb-3">
-                    <Text className="text-2xl font-medium text-gray-800 leading-7 flex-1">
-                      {journal.title}
-                    </Text>
+              />
 
-                    {journal.mood && (
-                      <View
-                        className="rounded-full p-2"
+              {journals.map((journal, index) => {
+                const colorScheme = getColorScheme(index);
+                const currentDate = new Date().toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                });
+
+                return (
+                  <View key={journal.id} className="relative mb-6">
+                    {/* Timeline Pill */}
+                    <View
+                      className="absolute left-0 top-4"
+                      style={{
+                        width: 80,
+                        height: 120,
+                        borderRadius: 40,
+                        backgroundColor: colorScheme.pill,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        shadowColor: colorScheme.pill,
+                        shadowOffset: { width: 0, height: 4 },
+                        shadowOpacity: 0.3,
+                        shadowRadius: 8,
+                        elevation: 5,
+                      }}
+                    >
+                      <Text
+                        className="text-white text-center font-bold transform -rotate-90"
                         style={{
-                          backgroundColor: `${
-                            getMoodDisplay(journal.mood).color
-                          }15`,
+                          fontSize: 12,
+                          letterSpacing: 1,
                         }}
                       >
-                        <Ionicons
-                          name={getMoodDisplay(journal.mood).icon as any}
-                          size={24}
-                          color={getMoodDisplay(journal.mood).color}
-                        />
-                      </View>
-                    )}
-                  </View>
+                        {journal.mood || "Entry"}
+                      </Text>
+                    </View>
 
-                  {/* Content */}
-                  <View className="mb-6">
-                    <Text className="text-base text-gray-600 leading-6 font-light">
-                      {journal.description}
-                    </Text>
+                    {/* Content Card */}
+                    <View className="ml-24 pl-6">
+                      <View
+                        className="rounded-2xl p-6"
+                        style={{
+                          backgroundColor: colorScheme.bg,
+                          borderWidth: 1,
+                          borderColor: "rgba(255, 255, 255, 0.5)",
+                          shadowColor: "#000",
+                          shadowOffset: { width: 0, height: 2 },
+                          shadowOpacity: 0.1,
+                          shadowRadius: 8,
+                          elevation: 3,
+                        }}
+                      >
+                        {/* Header with time and mood */}
+                        <View className="flex-row items-center mb-3">
+                          <Ionicons
+                            name="time-outline"
+                            size={16}
+                            color={colorScheme.text}
+                            style={{ opacity: 0.7 }}
+                          />
+                          <Text
+                            className="ml-2 font-medium"
+                            style={{
+                              color: colorScheme.text,
+                              fontSize: 14,
+                              opacity: 0.8,
+                            }}
+                          >
+                            {currentDate}
+                          </Text>
 
-                    {/* Display photo if exists */}
-                    {journal.photoBase64 && (
-                      <View className="mt-3">
-                        <Image
-                          source={{
-                            uri: `data:image/jpeg;base64,${journal.photoBase64}`,
-                          }}
+                          {journal.mood && (
+                            <View className="ml-auto">
+                              <View
+                                style={{
+                                  backgroundColor: getMoodDisplay(journal.mood)
+                                    .bgColor,
+                                  paddingHorizontal: 8,
+                                  paddingVertical: 4,
+                                  borderRadius: 12,
+                                }}
+                              >
+                                <Ionicons
+                                  name={
+                                    getMoodDisplay(journal.mood).icon as any
+                                  }
+                                  size={16}
+                                  color={getMoodDisplay(journal.mood).color}
+                                />
+                              </View>
+                            </View>
+                          )}
+                        </View>
+
+                        {/* Title */}
+                        <Text
+                          className="text-lg font-semibold mb-2 leading-6"
+                          style={{ color: colorScheme.text }}
+                        >
+                          {journal.title}
+                        </Text>
+
+                        {/* Description */}
+                        <Text
+                          className="leading-5 mb-4"
                           style={{
-                            width: "100%",
-                            height: 160,
-                            borderRadius: 8,
+                            color: colorScheme.text,
+                            fontSize: 14,
+                            opacity: 0.8,
                           }}
-                          resizeMode="cover"
-                        />
-                      </View>
-                    )}
-
-                    {/* Display voice note indicator if exists */}
-                    {journal.voiceNoteBase64 && (
-                      <View className="flex-row items-center mt-3 bg-purple-50 p-3 rounded-lg">
-                        <Ionicons
-                          name="mic-outline"
-                          size={20}
-                          color="#7C3AED"
-                        />
-                        <Text className="text-purple-700 ml-2">
-                          Voice Memo Available
+                        >
+                          {journal.description}
                         </Text>
+
+                        {/* Display photo if exists */}
+                        {journal.photoBase64 && (
+                          <View className="mb-4">
+                            <Image
+                              source={{
+                                uri: `data:image/jpeg;base64,${journal.photoBase64}`,
+                              }}
+                              style={{
+                                width: "100%",
+                                height: 120,
+                                borderRadius: 12,
+                                borderWidth: 2,
+                                borderColor: "rgba(255, 255, 255, 0.7)",
+                              }}
+                              resizeMode="cover"
+                            />
+                          </View>
+                        )}
+
+                        {/* Display voice note indicator if exists */}
+                        {journal.voiceNoteBase64 && (
+                          <View
+                            className="flex-row items-center mb-4"
+                            style={{
+                              backgroundColor: "rgba(255, 255, 255, 0.4)",
+                              paddingHorizontal: 12,
+                              paddingVertical: 8,
+                              borderRadius: 20,
+                            }}
+                          >
+                            <Ionicons
+                              name="mic-outline"
+                              size={16}
+                              color={colorScheme.text}
+                            />
+                            <Text
+                              className="ml-2 text-xs"
+                              style={{ color: colorScheme.text }}
+                            >
+                              Voice memo attached
+                            </Text>
+                          </View>
+                        )}
+
+                        {/* Action Buttons */}
+                        <View
+                          className="flex-row justify-end"
+                          style={{ gap: 8 }}
+                        >
+                          <TouchableOpacity
+                            onPress={() => handleEdit(journal.id!)}
+                            style={{
+                              backgroundColor: "rgba(255, 255, 255, 0.6)",
+                              paddingHorizontal: 16,
+                              paddingVertical: 8,
+                              borderRadius: 20,
+                              borderWidth: 1,
+                              borderColor: "rgba(255, 255, 255, 0.8)",
+                            }}
+                          >
+                            <View className="flex-row items-center">
+                              <Ionicons
+                                name="create-outline"
+                                size={14}
+                                color={colorScheme.text}
+                              />
+                              <Text
+                                className="ml-1 text-xs font-medium"
+                                style={{ color: colorScheme.text }}
+                              >
+                                Edit
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+
+                          <TouchableOpacity
+                            onPress={() => handleDelete(journal.id!)}
+                            style={{
+                              backgroundColor: "#FFB3BA",
+                              paddingHorizontal: 16,
+                              paddingVertical: 8,
+                              borderRadius: 20,
+                              borderWidth: 1,
+                              borderColor: "rgba(255, 179, 186, 0.8)",
+                            }}
+                          >
+                            <View className="flex-row items-center">
+                              <Ionicons
+                                name="trash-outline"
+                                size={14}
+                                color="#8B0000"
+                              />
+                              <Text
+                                className="ml-1 text-xs font-medium"
+                                style={{ color: "#8B0000" }}
+                              >
+                                Delete
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        </View>
                       </View>
-                    )}
+                    </View>
                   </View>
-
-                  {/* Action Buttons */}
-                  <View className="flex-row justify-end space-x-3">
-                    <TouchableOpacity
-                      className="px-6 py-3 rounded-xl"
-                      onPress={() => handleEdit(journal.id!)}
-                      style={{
-                        backgroundColor: "#A855F7",
-                        shadowColor: "#A855F7",
-                        shadowOffset: { width: 0, height: 4 },
-                        shadowOpacity: 0.3,
-                        shadowRadius: 8,
-                        elevation: 4,
-                      }}
-                    >
-                      <View className="flex-row items-center">
-                        <Ionicons
-                          name="create-outline"
-                          size={18}
-                          color="white"
-                        />
-                        <Text className="text-white font-medium ml-2 text-base">
-                          Edit
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      className="px-6 py-3 rounded-xl"
-                      onPress={() => handleDelete(journal.id!)}
-                      style={{
-                        backgroundColor: "#EF4444",
-                        shadowColor: "#EF4444",
-                        shadowOffset: { width: 0, height: 4 },
-                        shadowOpacity: 0.3,
-                        shadowRadius: 8,
-                        elevation: 4,
-                      }}
-                    >
-                      <View className="flex-row items-center">
-                        <Ionicons
-                          name="trash-outline"
-                          size={18}
-                          color="white"
-                        />
-                        <Text className="text-white font-medium ml-2 text-base">
-                          Delete
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </View>
-            ))}
+                );
+              })}
+            </View>
           </ScrollView>
         )}
       </View>
 
       {/* Floating Add Button */}
-      <View className="absolute bottom-8 right-6">
+      <View className="absolute bottom-8 right-8">
         <Pressable
           onPress={() => router.push("../journals/new")}
-          className="rounded-full p-4"
           style={{
-            backgroundColor: "#7C3AED",
-            shadowColor: "#7C3AED",
+            width: 60,
+            height: 60,
+            borderRadius: 30,
+            backgroundColor: "#FF9A6B",
+            justifyContent: "center",
+            alignItems: "center",
+            shadowColor: "#FF9A6B",
             shadowOffset: { width: 0, height: 8 },
             shadowOpacity: 0.4,
             shadowRadius: 16,
             elevation: 8,
           }}
         >
-          <Ionicons name="add" size={32} color="white" />
+          <Ionicons name="add" size={28} color="white" />
         </Pressable>
       </View>
     </View>
