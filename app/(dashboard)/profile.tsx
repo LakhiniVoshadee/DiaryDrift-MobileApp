@@ -181,375 +181,518 @@ const Profile = () => {
 
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: "#E8D5FF" }}
+      style={{ flex: 1 }}
       contentContainerStyle={{ paddingTop: 60, paddingBottom: 40 }}
     >
+      {/* Gradient Background */}
+      <View
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "#E8D5FF",
+        }}
+      />
+      <View
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "linear-gradient(to bottom, #E8D5FF, #D4A4EB)",
+        }}
+      />
+
       {/* Header */}
-      <View style={{
-        flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 20,
-        marginBottom: 40,
-      }}>
-        <TouchableOpacity style={{
-          width: 40,
-          height: 40,
-          borderRadius: 20,
-          backgroundColor: "rgba(255, 255, 255, 0.3)",
-          justifyContent: "center",
+      <View
+        style={{
+          flexDirection: "row",
           alignItems: "center",
-        }}>
-          <Text style={{ color: "#6B46C1", fontSize: 20, fontWeight: "600" }}>←</Text>
+          paddingHorizontal: 20,
+          marginBottom: 40,
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            width: 40,
+            height: 40,
+            borderRadius: 20,
+            backgroundColor: "rgba(245, 231, 255, 0.5)",
+            justifyContent: "center",
+            alignItems: "center",
+            shadowColor: "#6B46C1",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.2,
+            shadowRadius: 4,
+            elevation: 4,
+          }}
+        >
+          <Text style={{ color: "#6B46C1", fontSize: 20, fontWeight: "600" }}>
+            ←
+          </Text>
         </TouchableOpacity>
-        
+
         <View style={{ flex: 1, alignItems: "center" }}>
-          <Text style={{
-            fontSize: 24,
-            fontWeight: "700",
-            color: "#6B46C1",
-            letterSpacing: 0.5,
-          }}>
+          <Text
+            style={{
+              fontSize: 28,
+              fontWeight: "800",
+              color: "#6B46C1",
+              letterSpacing: 1,
+              textShadowColor: "rgba(0, 0, 0, 0.1)",
+              textShadowOffset: { width: 0, height: 1 },
+              textShadowRadius: 2,
+            }}
+          >
             Profile
           </Text>
         </View>
-        
+
         <View style={{ width: 40 }} />
       </View>
 
       {/* Profile Section */}
-      <View style={{
-        alignItems: "center",
-        marginBottom: 40,
-        paddingHorizontal: 20,
-      }}>
+      <View
+        style={{
+          alignItems: "center",
+          marginBottom: 40,
+          paddingHorizontal: 20,
+        }}
+      >
         <TouchableOpacity onPress={pickImage} disabled={uploading}>
           <View style={{ position: "relative" }}>
-            <View style={{
-              width: 120,
-              height: 120,
-              borderRadius: 60,
-              backgroundColor: "white",
-              padding: 4,
-              shadowColor: "#6B46C1",
-              shadowOffset: { width: 0, height: 8 },
-              shadowOpacity: 0.2,
-              shadowRadius: 16,
-              elevation: 10,
-            }}>
+            <View
+              style={{
+                width: 140,
+                height: 140,
+                borderRadius: 70,
+                backgroundColor: "#F5E7FF",
+                padding: 6,
+                shadowColor: "#6B46C1",
+                shadowOffset: { width: 0, height: 12 },
+                shadowOpacity: 0.3,
+                shadowRadius: 20,
+                elevation: 12,
+              }}
+            >
               <Image
                 source={{ uri: profileImage }}
                 style={{
-                  width: 112,
-                  height: 112,
-                  borderRadius: 56,
+                  width: 128,
+                  height: 128,
+                  borderRadius: 64,
+                  borderWidth: 2,
+                  borderColor: "#D4A4EB",
                 }}
               />
             </View>
-            
+
             {uploading && (
-              <View style={{
-                position: "absolute",
-                top: 4,
-                left: 4,
-                right: 4,
-                bottom: 4,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "rgba(107, 70, 193, 0.7)",
-                borderRadius: 56,
-              }}>
-                <ActivityIndicator size="small" color="#FFFFFF" />
+              <View
+                style={{
+                  position: "absolute",
+                  top: 6,
+                  left: 6,
+                  right: 6,
+                  bottom: 6,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "rgba(107, 70, 193, 0.6)",
+                  borderRadius: 64,
+                }}
+              >
+                <ActivityIndicator size="large" color="#FFFFFF" />
               </View>
             )}
-            
-            <View style={{
-              position: "absolute",
-              bottom: 8,
-              right: 8,
-              width: 36,
-              height: 36,
-              borderRadius: 18,
-              backgroundColor: "#6B46C1",
-              justifyContent: "center",
-              alignItems: "center",
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 4 },
-              shadowOpacity: 0.3,
-              shadowRadius: 8,
-              elevation: 8,
-            }}>
-              <Text style={{ fontSize: 16 }}>📷</Text>
+
+            <View
+              style={{
+                position: "absolute",
+                bottom: 10,
+                right: 10,
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                backgroundColor: "#6B46C1",
+                justifyContent: "center",
+                alignItems: "center",
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 6 },
+                shadowOpacity: 0.4,
+                shadowRadius: 10,
+                elevation: 10,
+              }}
+            >
+              <Text style={{ fontSize: 18, color: "#F5E7FF" }}>📷</Text>
             </View>
           </View>
         </TouchableOpacity>
 
-        <Text style={{
-          fontSize: 28,
-          fontWeight: "700",
-          color: "#6B46C1",
-          marginTop: 20,
-          marginBottom: 8,
-        }}>
+        <Text
+          style={{
+            fontSize: 32,
+            fontWeight: "800",
+            color: "#6B46C1",
+            marginTop: 24,
+            marginBottom: 12,
+            textShadowColor: "rgba(0, 0, 0, 0.1)",
+            textShadowOffset: { width: 0, height: 1 },
+            textShadowRadius: 2,
+          }}
+        >
           {userProfile?.fullName || "User"}
         </Text>
 
-        <TouchableOpacity style={{
-          flexDirection: "row",
-          alignItems: "center",
-          backgroundColor: "rgba(255, 255, 255, 0.4)",
-          paddingHorizontal: 16,
-          paddingVertical: 8,
-          borderRadius: 20,
-          marginBottom: 12,
-        }}>
-          <Text style={{ fontSize: 14, marginRight: 4 }}>✏️</Text>
-          <Text style={{ color: "#6B46C1", fontSize: 14, fontWeight: "600" }}>
+        <TouchableOpacity
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: "rgba(245, 231, 255, 0.7)",
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+            borderRadius: 24,
+            shadowColor: "#6B46C1",
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.2,
+            shadowRadius: 6,
+            elevation: 6,
+          }}
+        >
+          <Text style={{ fontSize: 16, marginRight: 6 }}>✏️</Text>
+          <Text style={{ color: "#6B46C1", fontSize: 16, fontWeight: "700" }}>
             Edit Profile
           </Text>
         </TouchableOpacity>
 
-        <View style={{
-          flexDirection: "row",
-          alignItems: "center",
-          backgroundColor: "rgba(255, 255, 255, 0.3)",
-          paddingHorizontal: 12,
-          paddingVertical: 6,
-          borderRadius: 15,
-        }}>
-          <Text style={{ fontSize: 12, marginRight: 4 }}>👥</Text>
-          <Text style={{ color: "#8B5CF6", fontSize: 14, fontWeight: "500" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: "rgba(245, 231, 255, 0.5)",
+            paddingHorizontal: 14,
+            paddingVertical: 8,
+            borderRadius: 18,
+            marginTop: 10,
+            shadowColor: "#6B46C1",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.1,
+            shadowRadius: 4,
+            elevation: 4,
+          }}
+        >
+          <Text style={{ fontSize: 14, marginRight: 6 }}>👥</Text>
+          <Text style={{ color: "#8B5CF6", fontSize: 16, fontWeight: "600" }}>
             {userProfile?.following || 0} Following
           </Text>
         </View>
       </View>
 
       {/* Profile Details Card */}
-      <View style={{
-        marginHorizontal: 20,
-        backgroundColor: "white",
-        borderRadius: 24,
-        padding: 24,
-        shadowColor: "#6B46C1",
-        shadowOffset: { width: 0, height: 8 },
-        shadowOpacity: 0.1,
-        shadowRadius: 24,
-        elevation: 8,
-        marginBottom: 30,
-      }}>
-        <View style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 20,
-        }}>
-          <Text style={{
-            fontSize: 20,
-            fontWeight: "700",
-            color: "#6B46C1",
-          }}>
+      <View
+        style={{
+          marginHorizontal: 20,
+          backgroundColor: "#FFFFFF",
+          borderRadius: 28,
+          padding: 28,
+          shadowColor: "#6B46C1",
+          shadowOffset: { width: 0, height: 12 },
+          shadowOpacity: 0.2,
+          shadowRadius: 24,
+          elevation: 10,
+          marginBottom: 30,
+          borderWidth: 3, // Increased border width for a prominent frame
+          borderColor: "#D4A4EB", // Purple frame
+          borderStyle: "solid",
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 20,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 22,
+              fontWeight: "800",
+              color: "#6B46C1",
+              textShadowColor: "rgba(0, 0, 0, 0.1)",
+              textShadowOffset: { width: 0, height: 1 },
+              textShadowRadius: 2,
+            }}
+          >
             About
           </Text>
-          <TouchableOpacity style={{
-            backgroundColor: "#F3F4F6",
-            paddingHorizontal: 12,
-            paddingVertical: 6,
-            borderRadius: 12,
-          }}>
-            <Text style={{ color: "#6B46C1", fontSize: 12, fontWeight: "600" }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#F5E7FF",
+              paddingHorizontal: 14,
+              paddingVertical: 8,
+              borderRadius: 14,
+              shadowColor: "#6B46C1",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.2,
+              shadowRadius: 4,
+              elevation: 4,
+            }}
+          >
+            <Text style={{ color: "#6B46C1", fontSize: 14, fontWeight: "700" }}>
               Edit
             </Text>
           </TouchableOpacity>
         </View>
 
-        <View style={{ marginBottom: 16 }}>
-          <Text style={{
-            color: "#9CA3AF",
-            fontSize: 12,
-            fontWeight: "600",
-            marginBottom: 4,
-            textTransform: "uppercase",
-            letterSpacing: 0.5,
-          }}>
+        <View style={{ marginBottom: 18 }}>
+          <Text
+            style={{
+              color: "#9CA3AF",
+              fontSize: 14,
+              fontWeight: "600",
+              marginBottom: 6,
+              textTransform: "uppercase",
+              letterSpacing: 0.5,
+            }}
+          >
             Full Name
           </Text>
-          <Text style={{
-            color: "#6B46C1",
-            fontSize: 16,
-            fontWeight: "600",
-          }}>
+          <Text
+            style={{
+              color: "#6B46C1",
+              fontSize: 18,
+              fontWeight: "700",
+            }}
+          >
             {userProfile?.fullName || "Not set"}
           </Text>
         </View>
 
         <View>
-          <Text style={{
-            color: "#9CA3AF",
-            fontSize: 12,
-            fontWeight: "600",
-            marginBottom: 4,
-            textTransform: "uppercase",
-            letterSpacing: 0.5,
-          }}>
+          <Text
+            style={{
+              color: "#9CA3AF",
+              fontSize: 14,
+              fontWeight: "600",
+              marginBottom: 6,
+              textTransform: "uppercase",
+              letterSpacing: 0.5,
+            }}
+          >
             Email
           </Text>
-          <Text style={{
-            color: "#6B46C1",
-            fontSize: 16,
-            fontWeight: "600",
-          }}>
+          <Text
+            style={{
+              color: "#6B46C1",
+              fontSize: 18,
+              fontWeight: "700",
+            }}
+          >
             {userProfile?.email || currentUser?.email || "Not set"}
           </Text>
         </View>
       </View>
 
       {/* Action Buttons */}
-      <View style={{ paddingHorizontal: 20, gap: 12 }}>
-        <TouchableOpacity style={{
-          backgroundColor: "white",
-          borderRadius: 16,
-          paddingVertical: 16,
-          paddingHorizontal: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          shadowColor: "#6B46C1",
-          shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.1,
-          shadowRadius: 12,
-          elevation: 4,
-        }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{
-              width: 36,
-              height: 36,
-              borderRadius: 18,
-              backgroundColor: "#E8D5FF",
-              justifyContent: "center",
-              alignItems: "center",
-              marginRight: 12,
-            }}>
-              <Text style={{ fontSize: 16 }}>🔑</Text>
-            </View>
-            <Text style={{
-              color: "#374151",
-              fontSize: 16,
-              fontWeight: "600",
-            }}>
-              Change Password
-            </Text>
-          </View>
-          <Text style={{ color: "#6B46C1", fontSize: 18, fontWeight: "600" }}>→</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity 
-          onPress={handleLogout}
+      <View style={{ paddingHorizontal: 20, gap: 14 }}>
+        <TouchableOpacity
           style={{
-            backgroundColor: "white",
-            borderRadius: 16,
-            paddingVertical: 16,
-            paddingHorizontal: 20,
+            backgroundColor: "#FFFFFF",
+            borderRadius: 20,
+            paddingVertical: 18,
+            paddingHorizontal: 22,
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
             shadowColor: "#6B46C1",
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.1,
+            shadowOffset: { width: 0, height: 6 },
+            shadowOpacity: 0.2,
             shadowRadius: 12,
-            elevation: 4,
+            elevation: 6,
+            borderWidth: 3, // Increased border width for a prominent frame
+            borderColor: "#D4A4EB", // Purple frame
+            borderStyle: "solid",
           }}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <View style={{
-              width: 36,
-              height: 36,
-              borderRadius: 18,
-              backgroundColor: "#FED7D7",
-              justifyContent: "center",
-              alignItems: "center",
-              marginRight: 12,
-            }}>
-              <Text style={{ fontSize: 16 }}>↗️</Text>
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                backgroundColor: "#E8D5FF",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: 14,
+              }}
+            >
+              <Text style={{ fontSize: 18 }}>🔑</Text>
             </View>
-            <Text style={{
-              color: "#374151",
-              fontSize: 16,
-              fontWeight: "600",
-            }}>
+            <Text
+              style={{
+                color: "#374151",
+                fontSize: 18,
+                fontWeight: "700",
+              }}
+            >
+              Change Password
+            </Text>
+          </View>
+          <Text style={{ color: "#6B46C1", fontSize: 20, fontWeight: "700" }}>
+            →
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={handleLogout}
+          style={{
+            backgroundColor: "#FFFFFF",
+            borderRadius: 20,
+            paddingVertical: 18,
+            paddingHorizontal: 22,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            shadowColor: "#6B46C1",
+            shadowOffset: { width: 0, height: 6 },
+            shadowOpacity: 0.2,
+            shadowRadius: 12,
+            elevation: 6,
+            borderWidth: 3, // Increased border width for a prominent frame
+            borderColor: "#D4A4EB", // Purple frame
+            borderStyle: "solid",
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                backgroundColor: "#FED7D7",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: 14,
+              }}
+            >
+              <Text style={{ fontSize: 18 }}>↗️</Text>
+            </View>
+            <Text
+              style={{
+                color: "#374151",
+                fontSize: 18,
+                fontWeight: "700",
+              }}
+            >
               Logout
             </Text>
           </View>
-          <Text style={{ color: "#6B46C1", fontSize: 18, fontWeight: "600" }}>→</Text>
+          <Text style={{ color: "#6B46C1", fontSize: 20, fontWeight: "700" }}>
+            →
+          </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={handleDeleteAccount}
           style={{
-            backgroundColor: "white",
-            borderRadius: 16,
-            paddingVertical: 16,
-            paddingHorizontal: 20,
+            backgroundColor: "#FFFFFF",
+            borderRadius: 20,
+            paddingVertical: 18,
+            paddingHorizontal: 22,
             flexDirection: "row",
             alignItems: "center",
             shadowColor: "#F87171",
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.1,
+            shadowOffset: { width: 0, height: 6 },
+            shadowOpacity: 0.2,
             shadowRadius: 12,
-            elevation: 4,
-            borderWidth: 1,
-            borderColor: "#FEE2E2",
+            elevation: 6,
+            borderWidth: 3, // Increased border width for a prominent frame
+            borderColor: "#D4A4EB", // Purple frame
+            borderStyle: "solid",
           }}
         >
-          <View style={{
-            width: 36,
-            height: 36,
-            borderRadius: 18,
-            backgroundColor: "#FEE2E2",
-            justifyContent: "center",
-            alignItems: "center",
-            marginRight: 12,
-          }}>
-            <Text style={{ fontSize: 16 }}>🗑️</Text>
+          <View
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 20,
+              backgroundColor: "#FEE2E2",
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: 14,
+            }}
+          >
+            <Text style={{ fontSize: 18 }}>🗑️</Text>
           </View>
-          <Text style={{
-            color: "#EF4444",
-            fontSize: 16,
-            fontWeight: "600",
-          }}>
+          <Text
+            style={{
+              color: "#EF4444",
+              fontSize: 18,
+              fontWeight: "700",
+            }}
+          >
             Delete Account
           </Text>
         </TouchableOpacity>
       </View>
 
       {/* Decorative Elements */}
-      <View style={{
-        position: "absolute",
-        top: 120,
-        left: -30,
-        width: 80,
-        height: 80,
-        borderRadius: 40,
-        backgroundColor: "rgba(196, 164, 255, 0.3)",
-      }} />
-      
-      <View style={{
-        position: "absolute",
-        top: 200,
-        right: -40,
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        backgroundColor: "rgba(248, 187, 208, 0.4)",
-      }} />
-      
-      <View style={{
-        position: "absolute",
-        bottom: 150,
-        left: -20,
-        width: 60,
-        height: 60,
-        borderRadius: 30,
-        backgroundColor: "rgba(255, 182, 193, 0.5)",
-      }} />
+      <View
+        style={{
+          position: "absolute",
+          top: 100,
+          left: -40,
+          width: 90,
+          height: 90,
+          borderRadius: 45,
+          backgroundColor: "rgba(212, 164, 235, 0.4)",
+          transform: [{ rotate: "-10deg" }],
+          shadowColor: "#6B46C1",
+          shadowOffset: { width: 0, height: 6 },
+          shadowOpacity: 0.2,
+          shadowRadius: 12,
+          elevation: 6,
+        }}
+      />
+
+      <View
+        style={{
+          position: "absolute",
+          top: 220,
+          right: -50,
+          width: 110,
+          height: 110,
+          borderRadius: 55,
+          backgroundColor: "rgba(248, 187, 208, 0.5)",
+          transform: [{ rotate: "15deg" }],
+          shadowColor: "#6B46C1",
+          shadowOffset: { width: 0, height: 6 },
+          shadowOpacity: 0.2,
+          shadowRadius: 12,
+          elevation: 6,
+        }}
+      />
+
+      <View
+        style={{
+          position: "absolute",
+          bottom: 140,
+          left: -30,
+          width: 70,
+          height: 70,
+          borderRadius: 35,
+          backgroundColor: "rgba(245, 231, 255, 0.6)",
+          transform: [{ rotate: "-5deg" }],
+          shadowColor: "#6B46C1",
+          shadowOffset: { width: 0, height: 6 },
+          shadowOpacity: 0.2,
+          shadowRadius: 12,
+          elevation: 6,
+        }}
+      />
     </ScrollView>
   );
 };
