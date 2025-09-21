@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import * as ImagePicker from "expo-image-picker";
@@ -70,11 +71,11 @@ const Profile = () => {
 
       // Launch image library
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images, // This is fine, no need to change
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [1, 1],
-        quality: 0.5, // Lower quality to reduce size for base64
-        base64: true, // Request base64 data
+        quality: 0.5,
+        base64: true,
       });
 
       if (!result.canceled && result.assets && result.assets.length > 0) {
@@ -152,7 +153,7 @@ const Profile = () => {
           onPress: async () => {
             if (currentUser) {
               try {
-                setUploading(true); // Use as general loading indicator
+                setUploading(true);
                 // First delete the profile from Firestore
                 await deleteUserProfile(currentUser.uid);
                 // Then delete the user authentication
@@ -179,207 +180,377 @@ const Profile = () => {
   };
 
   return (
-    <View
-      className="flex-1 w-full"
-      style={{ backgroundColor: "#D1C4E9", paddingTop: 40 }}
+    <ScrollView
+      style={{ flex: 1, backgroundColor: "#E8D5FF" }}
+      contentContainerStyle={{ paddingTop: 60, paddingBottom: 40 }}
     >
-      {/* Header with Back Button and Title */}
-      <View className="flex-row items-center px-4">
-        <TouchableOpacity>
-          <Text style={{ color: "#B39DDB", fontSize: 18 }}>←</Text>
+      {/* Header */}
+      <View style={{
+        flexDirection: "row",
+        alignItems: "center",
+        paddingHorizontal: 20,
+        marginBottom: 40,
+      }}>
+        <TouchableOpacity style={{
+          width: 40,
+          height: 40,
+          borderRadius: 20,
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+          <Text style={{ color: "#6B46C1", fontSize: 20, fontWeight: "600" }}>←</Text>
         </TouchableOpacity>
-        <Text
-          className="text-center flex-1 text-2xl"
-          style={{ color: "#B39DDB", fontFamily: "sans-serif-medium" }}
-        >
-          User Profile
-        </Text>
+        
+        <View style={{ flex: 1, alignItems: "center" }}>
+          <Text style={{
+            fontSize: 24,
+            fontWeight: "700",
+            color: "#6B46C1",
+            letterSpacing: 0.5,
+          }}>
+            Profile
+          </Text>
+        </View>
+        
+        <View style={{ width: 40 }} />
       </View>
 
       {/* Profile Section */}
-      <View className="items-center mt-6">
+      <View style={{
+        alignItems: "center",
+        marginBottom: 40,
+        paddingHorizontal: 20,
+      }}>
         <TouchableOpacity onPress={pickImage} disabled={uploading}>
           <View style={{ position: "relative" }}>
-            <Image
-              source={{ uri: profileImage }}
-              style={{
-                width: 100,
-                height: 100,
-                borderRadius: 50,
-                borderWidth: 2,
-                borderColor: "#B39DDB",
-              }}
-            />
-            {uploading && (
-              <View
+            <View style={{
+              width: 120,
+              height: 120,
+              borderRadius: 60,
+              backgroundColor: "white",
+              padding: 4,
+              shadowColor: "#6B46C1",
+              shadowOffset: { width: 0, height: 8 },
+              shadowOpacity: 0.2,
+              shadowRadius: 16,
+              elevation: 10,
+            }}>
+              <Image
+                source={{ uri: profileImage }}
                 style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  backgroundColor: "rgba(0,0,0,0.3)",
-                  borderRadius: 50,
+                  width: 112,
+                  height: 112,
+                  borderRadius: 56,
                 }}
-              >
+              />
+            </View>
+            
+            {uploading && (
+              <View style={{
+                position: "absolute",
+                top: 4,
+                left: 4,
+                right: 4,
+                bottom: 4,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "rgba(107, 70, 193, 0.7)",
+                borderRadius: 56,
+              }}>
                 <ActivityIndicator size="small" color="#FFFFFF" />
               </View>
             )}
-            <View
-              style={{
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                backgroundColor: "#B39DDB",
-                borderRadius: 15,
-                width: 30,
-                height: 30,
-                justifyContent: "center",
-                alignItems: "center",
-                borderWidth: 2,
-                borderColor: "white",
-              }}
-            >
-              <Text style={{ color: "white", fontSize: 16 }}>📷</Text>
+            
+            <View style={{
+              position: "absolute",
+              bottom: 8,
+              right: 8,
+              width: 36,
+              height: 36,
+              borderRadius: 18,
+              backgroundColor: "#6B46C1",
+              justifyContent: "center",
+              alignItems: "center",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.3,
+              shadowRadius: 8,
+              elevation: 8,
+            }}>
+              <Text style={{ fontSize: 16 }}>📷</Text>
             </View>
           </View>
         </TouchableOpacity>
-        <Text
-          className="text-xl mt-2"
-          style={{ color: "#B39DDB", fontFamily: "sans-serif-medium" }}
-        >
+
+        <Text style={{
+          fontSize: 28,
+          fontWeight: "700",
+          color: "#6B46C1",
+          marginTop: 20,
+          marginBottom: 8,
+        }}>
           {userProfile?.fullName || "User"}
         </Text>
-        <TouchableOpacity>
-          <Text style={{ color: "#8E8E93", fontSize: 14 }}>
-            ✏️ Edit Profile
+
+        <TouchableOpacity style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "rgba(255, 255, 255, 0.4)",
+          paddingHorizontal: 16,
+          paddingVertical: 8,
+          borderRadius: 20,
+          marginBottom: 12,
+        }}>
+          <Text style={{ fontSize: 14, marginRight: 4 }}>✏️</Text>
+          <Text style={{ color: "#6B46C1", fontSize: 14, fontWeight: "600" }}>
+            Edit Profile
           </Text>
         </TouchableOpacity>
-        <Text className="text-base mt-1" style={{ color: "#8E8E93" }}>
-          (📊 {userProfile?.following || 0} Following)
-        </Text>
+
+        <View style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          paddingHorizontal: 12,
+          paddingVertical: 6,
+          borderRadius: 15,
+        }}>
+          <Text style={{ fontSize: 12, marginRight: 4 }}>👥</Text>
+          <Text style={{ color: "#8B5CF6", fontSize: 14, fontWeight: "500" }}>
+            {userProfile?.following || 0} Following
+          </Text>
+        </View>
       </View>
 
-      {/* About Section */}
-      <View className="mt-6 px-4">
-        <View className="flex-row justify-between items-center">
-          <Text
-            className="text-lg"
-            style={{ color: "#B39DDB", fontFamily: "sans-serif-medium" }}
-          >
+      {/* Profile Details Card */}
+      <View style={{
+        marginHorizontal: 20,
+        backgroundColor: "white",
+        borderRadius: 24,
+        padding: 24,
+        shadowColor: "#6B46C1",
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.1,
+        shadowRadius: 24,
+        elevation: 8,
+        marginBottom: 30,
+      }}>
+        <View style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 20,
+        }}>
+          <Text style={{
+            fontSize: 20,
+            fontWeight: "700",
+            color: "#6B46C1",
+          }}>
             About
           </Text>
-          <TouchableOpacity>
-            <Text style={{ color: "#8E8E93", fontSize: 14 }}>Edit Profile</Text>
+          <TouchableOpacity style={{
+            backgroundColor: "#F3F4F6",
+            paddingHorizontal: 12,
+            paddingVertical: 6,
+            borderRadius: 12,
+          }}>
+            <Text style={{ color: "#6B46C1", fontSize: 12, fontWeight: "600" }}>
+              Edit
+            </Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-            padding: 10,
-            borderRadius: 10,
-            marginTop: 10,
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.1,
-            shadowRadius: 4,
-            elevation: 5,
-          }}
-        >
-          <Text style={{ color: "#8E8E93" }}>Full Name:</Text>
-          <Text style={{ color: "#B39DDB" }}>
+
+        <View style={{ marginBottom: 16 }}>
+          <Text style={{
+            color: "#9CA3AF",
+            fontSize: 12,
+            fontWeight: "600",
+            marginBottom: 4,
+            textTransform: "uppercase",
+            letterSpacing: 0.5,
+          }}>
+            Full Name
+          </Text>
+          <Text style={{
+            color: "#6B46C1",
+            fontSize: 16,
+            fontWeight: "600",
+          }}>
             {userProfile?.fullName || "Not set"}
           </Text>
-          <Text style={{ color: "#8E8E93", marginTop: 5 }}>Email:</Text>
-          <Text style={{ color: "#B39DDB" }}>
+        </View>
+
+        <View>
+          <Text style={{
+            color: "#9CA3AF",
+            fontSize: 12,
+            fontWeight: "600",
+            marginBottom: 4,
+            textTransform: "uppercase",
+            letterSpacing: 0.5,
+          }}>
+            Email
+          </Text>
+          <Text style={{
+            color: "#6B46C1",
+            fontSize: 16,
+            fontWeight: "600",
+          }}>
             {userProfile?.email || currentUser?.email || "Not set"}
           </Text>
         </View>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-            padding: 10,
-            borderRadius: 10,
-            marginTop: 10,
-            flexDirection: "row",
-            justifyContent: "space-between",
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.1,
-            shadowRadius: 4,
-            elevation: 5,
-          }}
-        >
-          <Text style={{ color: "#8E8E93" }}>Change Password</Text>
-          <Text style={{ color: "#B39DDB" }}>→</Text>
+      </View>
+
+      {/* Action Buttons */}
+      <View style={{ paddingHorizontal: 20, gap: 12 }}>
+        <TouchableOpacity style={{
+          backgroundColor: "white",
+          borderRadius: 16,
+          paddingVertical: 16,
+          paddingHorizontal: 20,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          shadowColor: "#6B46C1",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.1,
+          shadowRadius: 12,
+          elevation: 4,
+        }}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{
+              width: 36,
+              height: 36,
+              borderRadius: 18,
+              backgroundColor: "#E8D5FF",
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: 12,
+            }}>
+              <Text style={{ fontSize: 16 }}>🔑</Text>
+            </View>
+            <Text style={{
+              color: "#374151",
+              fontSize: 16,
+              fontWeight: "600",
+            }}>
+              Change Password
+            </Text>
+          </View>
+          <Text style={{ color: "#6B46C1", fontSize: 18, fontWeight: "600" }}>→</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+
+        <TouchableOpacity 
           onPress={handleLogout}
           style={{
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-            padding: 10,
-            borderRadius: 10,
-            marginTop: 10,
+            backgroundColor: "white",
+            borderRadius: 16,
+            paddingVertical: 16,
+            paddingHorizontal: 20,
             flexDirection: "row",
             justifyContent: "space-between",
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 2 },
+            alignItems: "center",
+            shadowColor: "#6B46C1",
+            shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.1,
-            shadowRadius: 4,
-            elevation: 5,
+            shadowRadius: 12,
+            elevation: 4,
           }}
         >
-          <Text style={{ color: "#8E8E93" }}>Logout</Text>
-          <Text style={{ color: "#B39DDB" }}>↻</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{
+              width: 36,
+              height: 36,
+              borderRadius: 18,
+              backgroundColor: "#FED7D7",
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: 12,
+            }}>
+              <Text style={{ fontSize: 16 }}>↗️</Text>
+            </View>
+            <Text style={{
+              color: "#374151",
+              fontSize: 16,
+              fontWeight: "600",
+            }}>
+              Logout
+            </Text>
+          </View>
+          <Text style={{ color: "#6B46C1", fontSize: 18, fontWeight: "600" }}>→</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+
+        <TouchableOpacity 
           onPress={handleDeleteAccount}
           style={{
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-            padding: 10,
-            borderRadius: 10,
-            marginTop: 10,
+            backgroundColor: "white",
+            borderRadius: 16,
+            paddingVertical: 16,
+            paddingHorizontal: 20,
             flexDirection: "row",
-            justifyContent: "space-between",
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 2 },
+            alignItems: "center",
+            shadowColor: "#F87171",
+            shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.1,
-            shadowRadius: 4,
-            elevation: 5,
+            shadowRadius: 12,
+            elevation: 4,
+            borderWidth: 1,
+            borderColor: "#FEE2E2",
           }}
         >
-          <Text style={{ color: "#F44336" }}>Delete Account</Text>
+          <View style={{
+            width: 36,
+            height: 36,
+            borderRadius: 18,
+            backgroundColor: "#FEE2E2",
+            justifyContent: "center",
+            alignItems: "center",
+            marginRight: 12,
+          }}>
+            <Text style={{ fontSize: 16 }}>🗑️</Text>
+          </View>
+          <Text style={{
+            color: "#EF4444",
+            fontSize: 16,
+            fontWeight: "600",
+          }}>
+            Delete Account
+          </Text>
         </TouchableOpacity>
       </View>
 
-      {/* Decorative pink shape (simulated with a View) */}
-      <View
-        style={{
-          position: "absolute",
-          top: 50,
-          left: 20,
-          width: 100,
-          height: 100,
-          backgroundColor: "#F8BBD0",
-          borderRadius: 50,
-          opacity: 0.7,
-        }}
-      />
-      <View
-        style={{
-          position: "absolute",
-          bottom: 100,
-          right: 20,
-          width: 120,
-          height: 120,
-          backgroundColor: "#F8BBD0",
-          borderRadius: 60,
-          opacity: 0.7,
-        }}
-      />
-    </View>
+      {/* Decorative Elements */}
+      <View style={{
+        position: "absolute",
+        top: 120,
+        left: -30,
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        backgroundColor: "rgba(196, 164, 255, 0.3)",
+      }} />
+      
+      <View style={{
+        position: "absolute",
+        top: 200,
+        right: -40,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        backgroundColor: "rgba(248, 187, 208, 0.4)",
+      }} />
+      
+      <View style={{
+        position: "absolute",
+        bottom: 150,
+        left: -20,
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        backgroundColor: "rgba(255, 182, 193, 0.5)",
+      }} />
+    </ScrollView>
   );
 };
 

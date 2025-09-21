@@ -4,13 +4,12 @@ import {
   ScrollView,
   TouchableOpacity,
   RefreshControl,
-  Image,
 } from "react-native";
 import React, { useEffect, useState, useCallback } from "react";
 import { router } from "expo-router";
 import { getAllJournalData } from "@/services/journalService";
 import { Journal } from "@/types/journal";
-import { Ionicons } from "@expo/vector-icons";
+
 
 // Helper function to get mood emoji and color
 const getMoodEmoji = (mood: string | undefined) => {
@@ -36,7 +35,7 @@ const Home = () => {
     Record<string, number>
   >({});
   const [refreshing, setRefreshing] = useState(false);
-  const [lastUpdate, setLastUpdate] = useState(Date.now());
+  // Removed unused lastUpdate state
 
   const fetchData = useCallback(async () => {
     try {
@@ -66,7 +65,7 @@ const Home = () => {
       console.error("Error fetching journal data:", error);
     } finally {
       setRefreshing(false);
-      setLastUpdate(Date.now());
+      // Removed setLastUpdate since lastUpdate is not used
     }
   }, []);
 
@@ -114,7 +113,7 @@ const Home = () => {
     return mostCommonMood;
   };
 
-  const mostCommonMood = getMostCommonMood();
+  // Removed unused mostCommonMood assignment
 
   return (
     <View className="flex-1" style={{ backgroundColor: "#E8D5FF" }}>
