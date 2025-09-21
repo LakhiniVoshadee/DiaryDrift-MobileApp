@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  Image,
   Pressable,
   Text,
   TextInput,
@@ -49,6 +50,20 @@ const Register = () => {
 
       <View className="flex-1 justify-center px-6">
         <View className="bg-white/90 backdrop-blur-sm rounded-[25px] shadow-xl p-8 max-w-lg w-full mx-auto">
+          {/* Logo at the top */}
+          <View className="items-center mb-4">
+            <Image
+              source={require("@/assets/images/DiraryDriftLogo.png")}
+              style={{
+                width: 100,
+                height: 100,
+                resizeMode: "contain",
+                marginBottom: 8,
+              }}
+              accessibilityLabel="DiaryDrift Logo"
+            />
+          </View>
+
           <Text className="text-4xl font-bold text-center text-gray-800 mb-2">
             Sign Up
           </Text>
@@ -94,13 +109,6 @@ const Register = () => {
               secureTextEntry
               placeholderTextColor="#9CA3AF"
             />
-          </View>
-
-          <View className="flex-row justify-between items-center mb-6">
-            <View className="flex-row items-center">
-              <View className="w-4 h-4 border border-gray-300 rounded-sm mr-2 bg-white" />
-              <Text className="text-gray-600 text-sm">I agree to Terms</Text>
-            </View>
           </View>
 
           <TouchableOpacity
