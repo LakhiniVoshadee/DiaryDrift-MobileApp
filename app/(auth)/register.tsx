@@ -49,7 +49,7 @@ const Register = () => {
       <View className="absolute bottom-[10%] left-[-15%] w-40 h-40 bg-[#FFB3BA] rounded-full opacity-30" />
 
       <View className="flex-1 justify-center px-6">
-        <View className="bg-white/90 backdrop-blur-sm rounded-[25px] shadow-xl p-8 max-w-lg w-full mx-auto">
+        <View className="bg-white/90 backdrop-blur-sm rounded-[25px] shadow-xl p-8 max-w-lg w-full mx-auto border-4 border-[#A084DC]">
           {/* Logo at the top */}
           <View className="items-center mb-4">
             <Image
@@ -74,7 +74,7 @@ const Register = () => {
             </Text>
             <TextInput
               placeholder="astanger@gmail.com"
-              className="border border-gray-200 bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
+              className="border-2 border-[#A084DC] bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
               value={email}
               onChangeText={setEmail}
               autoCapitalize="none"
@@ -89,7 +89,7 @@ const Register = () => {
             </Text>
             <TextInput
               placeholder="••••••••••"
-              className="border border-gray-200 bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
+              className="border-2 border-[#A084DC] bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
               value={password}
               onChangeText={setPassword}
               secureTextEntry
@@ -97,13 +97,13 @@ const Register = () => {
             />
           </View>
 
-          <View className="mb-4">
+          <View className="mb-6">
             <Text className="text-gray-600 text-sm font-medium mb-2 ml-1">
               CONFIRM PASSWORD
             </Text>
             <TextInput
               placeholder="••••••••••"
-              className="border border-gray-200 bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
+              className="border-2 border-[#A084DC] bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
               value={confirmPassword}
               onChangeText={setConfirmPassword}
               secureTextEntry
@@ -113,7 +113,7 @@ const Register = () => {
 
           <TouchableOpacity
             onPress={handleRegister}
-            className="bg-[#A084DC] p-4 rounded-[15px] shadow-md active:bg-[#8B5CF6] mb-6"
+            className="bg-[#A084DC] p-4 rounded-[15px] shadow-md active:bg-[#8B5CF6] mb-6 border-2 border-[#A084DC]"
           >
             {isLoading ? (
               <ActivityIndicator size="small" color="#fff" />

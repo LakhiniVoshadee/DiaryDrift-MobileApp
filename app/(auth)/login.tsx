@@ -42,7 +42,7 @@ const Login = () => {
       <View className="absolute bottom-[10%] left-[-15%] w-40 h-40 bg-[#FFB3BA] rounded-full opacity-30" />
 
       <View className="flex-1 justify-center px-6">
-        <View className="bg-white/90 backdrop-blur-sm rounded-[25px] shadow-xl p-8 max-w-lg w-full mx-auto">
+        <View className="bg-white/90 backdrop-blur-sm rounded-[25px] shadow-xl p-8 max-w-lg w-full mx-auto border-4 border-[#A084DC]">
           <Text className="text-4xl font-bold text-center text-gray-800 mb-2">
             Log in
           </Text>
@@ -53,7 +53,7 @@ const Login = () => {
             </Text>
             <TextInput
               placeholder="astanger@gmail.com"
-              className="border border-gray-200 bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
+              className="border-2 border-[#A084DC] bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
               value={email}
               onChangeText={setEmail}
               autoCapitalize="none"
@@ -68,7 +68,7 @@ const Login = () => {
             </Text>
             <TextInput
               placeholder="••••••••••"
-              className="border border-gray-200 bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
+              className="border-2 border-[#A084DC] bg-gray-50 rounded-[15px] p-4 text-base text-gray-800 font-medium"
               value={password}
               onChangeText={setPassword}
               secureTextEntry
@@ -76,7 +76,7 @@ const Login = () => {
             />
           </View>
 
-          <View className="flex-row justify-between items-center mb-6">
+          <View className="flex-row justify-between items-center mb-6 p-2">
             <View className="flex-row items-center">
               <View className="w-4 h-4 border border-gray-300 rounded-sm mr-2 bg-white" />
               <Text className="text-gray-600 text-sm">Remember me</Text>
@@ -90,7 +90,7 @@ const Login = () => {
 
           <TouchableOpacity
             onPress={handleLogin}
-            className="bg-[#A084DC] p-4 rounded-[15px] shadow-md active:bg-[#8B5CF6] mb-6"
+            className="bg-[#A084DC] p-4 rounded-[15px] shadow-md active:bg-[#8B5CF6] mb-6 border-2 border-[#A084DC]"
           >
             {isLoading ? (
               <ActivityIndicator size="small" color="#fff" />
@@ -109,7 +109,7 @@ const Login = () => {
           </Pressable>
 
           {/* Social Login Icons */}
-          <View className="flex-row justify-center items-center mt-6 space-x-4">
+          <View className="flex-row justify-center items-center mt-6 space-x-4 p-2">
             <View className="w-10 h-10 bg-[#4267B2] rounded-full justify-center items-center">
               <Text className="text-white font-bold text-lg">f</Text>
             </View>
