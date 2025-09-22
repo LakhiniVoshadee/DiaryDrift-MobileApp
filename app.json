@@ -4,7 +4,7 @@
     "slug": "diarydrift",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/DiaryDriftLogo.png",
+    "icon": "./assets/images/DiraryDriftLogo.png",
     "scheme": "diarydrift",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,22 +13,23 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/DiaryDriftLogo.png",
+        "foregroundImage": "./assets/images/DiraryDriftLogo.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.lakhini.diarydrift"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/DiaryDriftLogo.png"
+      "favicon": "./assets/images/DiraryDriftLogo.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/DiaryDriftLogo.png",
+          "image": "./assets/images/DiraryDriftLogo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -37,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e2b0442b-f865-4603-a22f-35c58a9d278d"
+      }
     }
   }
 }
