@@ -5,9 +5,9 @@
 
 ## Description
 
-**DiaryDrift** is a cross-platform mobile diary application built to help users seamlessly capture, organize, and manage their daily memories. Crafted with aesthetic vibes and a modern UI, DiaryDrift emphasizes intuitive user experience, robust functionality, and secure data handling.
+**DiaryDrift** is a cross-platform mobile diary application built to help users seamlessly capture, organize, and manage their daily memories. Crafted with aesthetic vibes and a modern UI, DiaryDrift [...]
 
-The app is developed using **React Native** with **Expo**, featuring state-of-the-art tools and technologies for both frontend and backend. Data persistence and authentication are powered by **Firebase**, while custom API functionalities leverage **Node.js**. State management ensures smooth navigation and data flow. The app supports core CRUD operations, allowing users to create, read, update, and delete diary entries with ease. Authentication is handled through Firebase Auth, providing secure access to user diaries.
+The app is developed using **React Native** with **Expo**, featuring state-of-the-art tools and technologies for both frontend and backend. Data persistence and authentication are powered by **Firebas[...]  
 
 DiaryDrift is built for Android devices, with a focus on performance, reliability, and user-centric design.
 
@@ -45,7 +45,14 @@ DiaryDrift is built for Android devices, with a focus on performance, reliabilit
 
 > Add more screenshots by uploading them to your repo and referencing them below.
 
-<img src="image1" alt="DiaryDrift Screenshot" width="400"/>
+<div align="center">
+  <table>
+    <tr>
+      <td><img src="image1" alt="Sign Up Screenshot" width="250"/></td>
+      <td><img src="image2" alt="Login Screenshot" width="250"/></td>
+    </tr>
+  </table>
+</div>
 
 ---
 
