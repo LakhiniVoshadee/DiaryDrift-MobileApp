@@ -43,13 +43,24 @@ DiaryDrift is built for Android devices, with a focus on performance, reliabilit
 
 ## Screenshots
 
-> Add more screenshots by uploading them to your repo and referencing them below.
-
 <div align="center">
   <table>
     <tr>
-      <td><img src="image1" alt="Sign Up Screenshot" width="250"/></td>
-      <td><img src="image2" alt="Login Screenshot" width="250"/></td>
+      <td><img src="assets/images/loginpage.jpeg" alt="Login Screenshot" width="250"/></td>
+      <td><img src="assets/images/signup.jpeg" alt="Sign Up Screenshot" width="250"/></td>
+      <td><img src="assets/images/homescreen1.jpeg" alt="Home Screenshot" width="250"/></td>
+      <td><img src="assets/images/homescreen2.jpeg" alt="Home Screenshot" width="250"/></td>
+    </tr>
+    <tr>
+      <td><img src="assets/images/homescreen3.jpeg" alt="Home Screenshot" width="250"/></td>
+      <td><img src="assets/images/journalscreen1.jpeg" alt="Home Screenshot" width="250"/></td>
+      <td><img src="assets/images/journalscreen2.jpeg" alt="Home Screenshot" width="250"/></td>
+      <td><img src="assets/images/createjpurnalscreen1.jpeg" alt="Home Screenshot" width="250"/></td>
+    </tr>
+    <tr>
+      <td><img src="assets/images/updatejournalscreen.jpeg" alt="Home Screenshot" width="250"/></td>
+      <td><img src="assets/images/updatejournalscreen2.jpeg" alt="Home Screenshot" width="250"/></td>
+      <td><img src="assets/images/settingscreen.jpeg" alt="Home Screenshot" width="250"/></td>
     </tr>
   </table>
 </div>
