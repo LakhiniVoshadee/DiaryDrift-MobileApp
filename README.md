@@ -125,3 +125,7 @@ See the image above for full coursework requirements.
 https://youtu.be/L0BelYrNzjI?si=qa6RcUxdoTXj6DjL
 
 ---
+
+## Download APK
+
+https://expo.dev/artifacts/eas/gdmBVZmLSKBkt4cHddkz8s.apk
