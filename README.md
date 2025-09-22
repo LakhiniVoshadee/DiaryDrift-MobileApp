@@ -1,6 +1,7 @@
 # DiaryDrift Mobile App
 
-<img src="image1" alt="DiaryDrift Screenshot" width="600"/>
+![da905ab3-d5b1-4da0-bcf5-7c8e1854cf94](https://github.com/user-attachments/assets/c6cef75d-ab30-43d5-98f0-c4c769c8b303)
+
 
 ## Description
 
